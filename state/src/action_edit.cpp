@@ -77,6 +77,20 @@ class ActionEditing
             return pages;
         }
 
+        // create new list of blank action pages
+        std::vector<robotis_op::action_file_define::Page> create_blank_book(size_t num_pages)
+        {
+            std::vector<robotis_op::action_file_define::Page> blank_pages;
+            robotis_op::action_file_define::Page blank_page;
+
+            for (size_t i = 0; i < num_pages; ++i)
+            {
+                blank_pages.push_back(blank_page);
+            }
+
+            return blank_pages;
+        }
+
 
         void action_list_callback(const state::RandomList::ConstPtr& msg)
         {
@@ -88,7 +102,11 @@ class ActionEditing
                 action_pages = msg->nums;
                 ROS_INFO("Stored Pages");
 
+                // Load data file
                 std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin");
+
+                // Create blank pages of size action_pages
+                std::vector<robotis_op::Action_file_define::Page> blank_pages = create_blank_book(action_pages.size());
 
                 first_message = true;
                 state = EDITING;
