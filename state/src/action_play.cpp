@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "std_msgs/String"
+#include "std_msgs/String.h"
 // Create states
 enum State{
     WAITING,
