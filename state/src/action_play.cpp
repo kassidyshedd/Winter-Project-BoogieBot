@@ -74,4 +74,12 @@ class ActionPlay
                 state = DONE;
             }
         }
+};
+
+int main(int argc, char* argv[])
+{
+    ros::init(argc, argv, "actionplay_node");
+    ActionPlay actionPlay;
+    actionPlay.run();
+    return 0;
 }
