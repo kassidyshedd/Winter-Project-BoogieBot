@@ -12,6 +12,7 @@ find_package(catkin REQUIRED
     std_msgs
     std_srvs
     op3_action_editor
+    op3_action_module
     message_generation
 )
 
@@ -106,7 +107,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES state
- CATKIN_DEPENDS op3_action_editor
+ CATKIN_DEPENDS op3_action_editor op3_action_module
 #  DEPENDS system_lib
 )
 

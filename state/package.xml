@@ -54,11 +54,13 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>std_srvs</build_depend>
   <build_depend>op3_action_editor</build_depend>
+  <build_depend>op3_action_module</build_depend>
 
   <exec_depend>roscpp</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>std_srvs</exec_depend>
   <exec_depend>op3_action_editor</exec_depend>
+  <exec_depend>op3_action_module</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
