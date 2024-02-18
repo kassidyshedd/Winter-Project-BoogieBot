@@ -106,7 +106,7 @@ class ActionEditing
                 std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin");
 
                 // Create blank pages of size action_pages
-                std::vector<robotis_op::Action_file_define::Page> blank_pages = create_blank_book(action_pages.size());
+                std::vector<robotis_op::action_file_define::Page> blank_pages = create_blank_book(action_pages.size());
 
                 first_message = true;
                 state = EDITING;
