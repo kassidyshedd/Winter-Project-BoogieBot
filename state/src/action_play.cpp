@@ -18,7 +18,7 @@ class ActionPlay
 
             // Subscribers
             // Start action subscriber
-            start_action_sub = nh.subscribe("start", 10, &ActionPlay::start_callback, this);
+            start_action_sub = nh.subscribe("startplay", 10, &ActionPlay::start_callback, this);
         }
         
 
@@ -71,7 +71,7 @@ class ActionPlay
                 msg.data = "Done!";
                 done_action_pub.publish(msg);
                 ROS_INFO_ONCE("Published message on 'done' topic, switching to waiting state.");
-                state = DONE;
+                state = WAITING;
             }
         }
 };
