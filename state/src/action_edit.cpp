@@ -1,6 +1,6 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "action_handling/RandomList.h"
+#include "state/RandomList.h"
 #include "op3_action_editor/action_editor.h"
 
 // Create States
@@ -50,14 +50,14 @@ class ActionEditing
         bool first_message;
         bool reset_message;
 
-        void action_list_callback(const action_handling::RandomList::ConstPtr& msg)
+        void action_list_callback(const state::RandomList::ConstPtr& msg)
         {
             if (!first_message)
             {
                 ROS_INFO("Action Editing - Recieved message on 'send_list' topic, switch to editing state. ");
                 
                 // Store the list of pages
-                action_pages = 
+                // action_pages = 
 
 
                 first_message = true;

@@ -27,7 +27,7 @@ class BoogieBot
             action_pick_pub = nh.advertise<std_msgs::String>("send_tempo", 10);
             action_picking_pub = nh.advertise<std_msgs::Int64>("send_num_tempo", 10);
             // Action list publisher - causes switch in action_editing_node
-            action_edit_pub = nh.advertise<state::RandomList>("send_list", 10);
+            action_edit_pub = nh.advertise<state::RandomList>("Send_List", 10);
             // Action edit publisher - causes switch in action_playing node
             action_play_pub = nh.advertise<std_msgs::String>("send_ready", 10);
             // reset pub - causes variables in all nodes to reset
