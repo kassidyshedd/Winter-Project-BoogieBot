@@ -137,6 +137,7 @@ ${catkin_INCLUDE_DIRS}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/state_node.cpp)
 add_executable(action_edit_node src/action_edit.cpp)
+add_executable(action_play_node src/action_play.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -154,6 +155,10 @@ target_link_libraries(${PROJECT_NAME}_node
 )
 
 target_link_libraries(action_edit_node
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(action_play_node
   ${catkin_LIBRARIES}
 )
 
