@@ -88,7 +88,7 @@ class ActionEditing
                 action_pages = msg->nums;
                 ROS_INFO("Stored Pages");
 
-                std::vector<robotis_op::action_file_define::Page> book = load_action_file('data/motion_4095.bin')
+                std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin")
 
                 first_message = true;
                 state = EDITING;
