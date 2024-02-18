@@ -60,7 +60,7 @@ class ActionEditing
         std::vector<robotis_op::action_file_define::Page> load_action_file(const std::string& filename)
         {
             // Open current .bin file
-            std::ifstream file(filename, std::ios::binary);
+            std::ifstream file(filename.c_str(), std::ios::binary);
             if (!file.is_open())
             {
                 return {};
@@ -88,7 +88,7 @@ class ActionEditing
                 action_pages = msg->nums;
                 ROS_INFO("Stored Pages");
 
-                std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin")
+                std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin");
 
                 first_message = true;
                 state = EDITING;
