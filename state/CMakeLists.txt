@@ -11,6 +11,7 @@ find_package(catkin REQUIRED
     roscpp
     std_msgs
     std_srvs
+    op3_action_editor
     message_generation
 )
 
@@ -105,7 +106,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES state
-#  CATKIN_DEPENDS other_catkin_pkg
+ CATKIN_DEPENDS op3_action_editor
 #  DEPENDS system_lib
 )
 
@@ -134,6 +135,7 @@ ${catkin_INCLUDE_DIRS}
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/state_node.cpp)
+add_executable(action_edit_node src/action_edit.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,6 +149,10 @@ add_executable(${PROJECT_NAME}_node src/state_node.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(action_edit_node
   ${catkin_LIBRARIES}
 )
 
