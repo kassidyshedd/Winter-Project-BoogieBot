@@ -22,7 +22,7 @@ class ActionPicking
         {
             // Publishers 
             // action_list_pub - publishes list of actions
-            action_list_pub = nh.advertise<action_handling::RandomList>("list_send", 10);
+            action_list_pub = nh.advertise<state::RandomList>("list_send", 10);
 
             // Subscribers
             // Subscribe to state_machine node to get the tempo
@@ -140,7 +140,7 @@ class ActionPicking
                 std::vector<int64_t> list = genList(size, min, max);
 
                 // Send message
-                action_handling::RandomList msg1;
+                state::RandomList msg1;
                 msg1.nums = list;
                 action_list_pub.publish(msg1);
                 ROS_INFO_ONCE("Action picking - Published list!");
