@@ -189,7 +189,7 @@ class BoogieBot
                 // msg.data = "Ready to edit actions";
                 // action_edit_pub.publish(msg);
 
-                state::RandomList list_msg; ROS_INFO_ONCE("-------------")
+                state::RandomList list_msg;
                 list_msg.nums = list;
                 action_edit_pub.publish(list_msg);
                 ROS_INFO_ONCE("Published message on 'send_list' topic, waiting for action_editor node. ");             
