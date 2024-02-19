@@ -248,7 +248,7 @@ void ActionPlay::playMP3(std::string &path)
   play_sound_pub_.publish(sound_msg);
 }
 
-void ActionPlay:stopMP3()
+void ActionPlay::stopMP3()
 {
   std_msgs::String sound_msg;
   sound_msg.data = "";
