@@ -47,7 +47,7 @@ class ActionPlay : public Dance
  protected:
   enum ActionCommandIndex
   {
-    // BrakeActionCommand = -2,
+    BrakeActionCommand = -2,
     StopActionCommand = -1,
   };
 
