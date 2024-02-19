@@ -59,7 +59,7 @@ int main(int argc, char **argv)
   default_mp3_path = ros::package::getPath("op3_demo") + "/data/mp3/";
 
   // Subsribe to starting topic, which causes switch to actionplay mode ---
-  ros::Subscriber action_play_sub = nh.subscribe("STARTING", 1, startingCallback);
+//   ros::Subscriber action_play_sub = nh.subscribe("STARTING", 1, startingCallback);
 
   ros::start();
 
@@ -140,16 +140,16 @@ int main(int argc, char **argv)
 }
 
 
-// starting callback function
-void startingCallback(const std_msgs::String::ConstPtr &msg)
-{   ROS_INFO("ActionPlay - recieved start message");
-    desired_status = ActionPlay;
-    apply_desired = true;
+// // starting callback function
+// void startingCallback(const std_msgs::String::ConstPtr &msg)
+// {   ROS_INFO("ActionPlay - recieved start message");
+//     desired_status = ActionPlay;
+//     apply_desired = true;
 
-    playSound(default_mp3_path + "Start motion demonstration.mp3");
-    setLED(0x04);
-    ROS_INFO("motion demo?");
-}
+//     playSound(default_mp3_path + "Start motion demonstration.mp3");
+//     setLED(0x04);
+//     ROS_INFO("motion demo?");
+// }
 
 
 void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
@@ -180,6 +180,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   {
     if (msg->data == "start")
     {
+      ROS_INFO_ONCE("Recieved start message")  
       // select current demo
       desired_status = (desired_status == Ready) ? desired_status + 1 : desired_status;
       apply_desired = true;

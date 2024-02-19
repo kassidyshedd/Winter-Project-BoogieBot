@@ -30,6 +30,8 @@ class BoogieBot
             action_edit_pub = nh.advertise<state::RandomList>("Send_List", 10);
             // Action edit publisher - causes switch in action_playing node
             action_play_pub = nh.advertise<std_msgs::String>("STARTING", 10);
+            // mimic button
+            button_pub = nh.advertise<std_msgs::String>("/robotis/open_cr/button", 10);
             // reset pub - causes variables in all nodes to reset
             reset_pub = nh.advertise<std_msgs::String>("reset", 10);
 
@@ -70,6 +72,7 @@ class BoogieBot
         ros::Publisher action_edit_pub;
         ros::Publisher action_play_pub;
         ros::Publisher reset_pub;
+        ros::Publisher button_pub;
 
         ros::ServiceServer listen_srv;
 
@@ -203,11 +206,16 @@ class BoogieBot
             {
                 ROS_INFO_ONCE("State -Action_Player State");
 
-                std_msgs::String msg;
-                msg.data = "Ready to play actions";
-                action_play_pub.publish(msg);
+                // std_msgs::String msg;
+                // msg.data = "Ready to play actions";
+                // action_play_pub.publish(msg);
 
-                ROS_INFO_ONCE("State - Published message on 'send_ready' topic, waiting for action_player node. ");  
+                // ROS_INFO_ONCE("State - Published message on 'send_ready' topic, waiting for action_player node. ");  
+
+                std_msgs::String msg;
+                msg.data = "start";
+                button_pub.publish(msg);
+                ROS_INFO_ONCE("State - mimiced button.")
                 
             }
 
