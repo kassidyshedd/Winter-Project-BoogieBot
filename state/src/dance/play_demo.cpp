@@ -246,7 +246,7 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
   {
     ROS_INFO_ONCE("inside doc[set_name]");
     play_list_ = doc[set_name].as<std::vector<int> >();
-    ROS_INFO_STREAM("playlist" << play_list_);
+    ROS_INFO_STREAM("playlist: " << boost::algorithm::join(play_list_, ", "));
     return true;
   }
   else
