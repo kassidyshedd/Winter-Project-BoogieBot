@@ -222,7 +222,7 @@ class BoogieBot
                 action_play_pub.publish(msg);
 
                 first_message_tempo = false;
-                ROS_INFO_STREAM(first_message_tempo)
+                ROS_INFO_STREAM(first_message_tempo);
                 first_message_actionlist = false;
                 first_message_actionedit = false;
                 first_message_actionplay = false;
