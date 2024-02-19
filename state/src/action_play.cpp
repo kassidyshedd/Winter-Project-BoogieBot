@@ -19,7 +19,7 @@ void setLED(int led);
 bool checkManagerRunning(std::string& manager_name);
 void dxlTorqueChecker();
 
-void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg);
+void modeCallback(const std_msgs::String::ConstPtr &msg);
 
 const int SPIN_RATE = 30;
 const bool DEBUG_PRINT = true;
