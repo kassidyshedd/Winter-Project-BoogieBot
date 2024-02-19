@@ -39,6 +39,7 @@ void ActionPlay::setDemoEnable()
 
   ROS_INFO_COND(DEBUG_PRINT, "Start ActionScript Demo");
 
+  ROS_INFO_ONCE("playing init pose");
   playAction(InitPose);
 
   startProcess(play_list_name_);
@@ -112,8 +113,10 @@ void ActionPlay::process()
 
 void ActionPlay::startProcess(const std::string &set_name)
 {
+  ROS_INFO_ONCE("start process");
   parseActionScriptSetName(script_path_, set_name);
 
+  
   play_status_ = PlayAction;
 }
 
@@ -203,7 +206,7 @@ void ActionPlay::parseActionScript(const std::string &path)
 
 bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::string &set_name)
 {
-
+  ROS_INFO_ONCE("load yaml");
   YAML::Node doc;
 
   try
