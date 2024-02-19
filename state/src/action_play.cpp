@@ -180,7 +180,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   {
     if (msg->data == "start")
     {
-      ROS_INFO_ONCE("Recieved start message")  
+      ROS_INFO_ONCE("Recieved start message");
       // select current demo
       desired_status = (desired_status == Ready) ? desired_status + 1 : desired_status;
       apply_desired = true;
