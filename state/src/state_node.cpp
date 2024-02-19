@@ -137,7 +137,7 @@ class BoogieBot
         }
 
         void timer_callback()
-        {   
+        {   ROS_INFO_STREAM(state);
             // Waiting for further instruction
             if (state == WAITING) 
             {
@@ -228,7 +228,10 @@ class BoogieBot
 
                 ROS_INFO_ONCE("Published message on 'reset' topic, reset all flags, switching to waiting state");  
                 state = WAITING;
-                ROS_INFO_STREAM(state);
+                ROS_INFO_ONCE("-------------")
+                ROS_INFO_ONCE("-------------")
+                ROS_INFO_ONCE("-------------")
+                // ROS_INFO_STREAM(state);
             }
         }
 };
