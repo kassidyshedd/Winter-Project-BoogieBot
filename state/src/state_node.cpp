@@ -206,9 +206,9 @@ class BoogieBot
             {
                 ROS_INFO_ONCE("State -Action_Player State");
 
-                // std_msgs::String msg;
-                // msg.data = "Ready to play actions";
-                // action_play_pub.publish(msg);
+                std_msgs::String msg1;
+                msg1.data = "Ready to play actions";
+                action_play_pub.publish(msg1);
 
                 // ROS_INFO_ONCE("State - Published message on 'send_ready' topic, waiting for action_player node. ");  
 

@@ -22,7 +22,7 @@ void dxlTorqueChecker();
 void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg);
 
 const int SPIN_RATE = 30;
-const bool DEBUG_PRINT = false;
+const bool DEBUG_PRINT = true;
 
 ros::Publisher init_pose_pub;
 ros::Publisher play_sound_pub;
@@ -31,7 +31,7 @@ ros::Publisher dxl_torque_pub;
 
 std::string default_mp3_path = "";
 int current_status = Ready;
-int desired_status = ActionPlay;
+int desired_status = Ready;
 bool apply_desired = false;
 
 //node main
@@ -50,8 +50,9 @@ int main(int argc, char **argv)
   play_sound_pub = nh.advertise<std_msgs::String>("/play_sound_file", 0);
   led_pub = nh.advertise<robotis_controller_msgs::SyncWriteItem>("/robotis/sync_write_item", 0);
   dxl_torque_pub = nh.advertise<std_msgs::String>("/robotis/dxl_torque", 0);
-  ros::Subscriber buttuon_sub = nh.subscribe("/robotis/open_cr/button", 1, buttonHandlerCallback);
-  ros::Subscriber mode_command_sub = nh.subscribe("/robotis/mode_command", 1, demoModeCommandCallback);
+  ros::Subscriber button_sub = nh.subscribe("/robotis/open_cr/button", 1, buttonHandlerCallback);
+  ros::Subscriber mode_sub = nh.subscribe("STARTING", 1, modeCallback);
+//   ros::Subscriber mode_command_sub = nh.subscribe("/robotis/mode_command", 1, demoModeCommandCallback);
 
   default_mp3_path = ros::package::getPath("op3_demo") + "/data/mp3/";
   
@@ -253,30 +254,41 @@ void dxlTorqueChecker()
   dxl_torque_pub.publish(check_msg);
 }
 
-void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
+void modeCallback(const std_msgs::String::ConstPtr &msg)
 {
-  // In demo mode
-  if (current_status != Ready)
-  {
-    if (msg->data == "ready")
-    {
-      // go to mode selection status
-      desired_status = Ready;
-      apply_desired = true;
+    desired_status = ActionPlay;
+    apply_desired = true;
 
-      playSound(default_mp3_path + "Demonstration ready mode.mp3");
-      setLED(0x01 | 0x02 | 0x04);
-    }
-  }
-  // In ready mode
-  else
-  {
-      desired_status = ActionPlay;
-      apply_desired = true;
+    playSound(default_mp3_path + "Start motion demonstration.mp3");
+     ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
 
-      // play sound
-      dxlTorqueChecker();
-      playSound(default_mp3_path + "Start motion demonstration.mp3");
-      ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
-  }
+
 }
+
+// void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
+// {
+//   // In demo mode
+//   if (current_status != Ready)
+//   {
+//     if (msg->data == "ready")
+//     {
+//       // go to mode selection status
+//       desired_status = Ready;
+//       apply_desired = true;
+
+//       playSound(default_mp3_path + "Demonstration ready mode.mp3");
+//       setLED(0x01 | 0x02 | 0x04);
+//     }
+//   }
+//   // In ready mode
+//   else
+//   {
+//       desired_status = ActionPlay;
+//       apply_desired = true;
+
+//       // play sound
+//       dxlTorqueChecker();
+//       playSound(default_mp3_path + "Start motion demonstration.mp3");
+//       ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
+//   }
+// }
