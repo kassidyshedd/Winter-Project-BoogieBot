@@ -31,7 +31,7 @@ ros::Publisher dxl_torque_pub;
 
 std::string default_mp3_path = "";
 int current_status = Ready;
-int desired_status = Ready;
+int desired_status = ActionPlay;
 bool apply_desired = false;
 
 //node main
