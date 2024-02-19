@@ -277,7 +277,7 @@ void ActionPlay::brakeAction()
   std_msgs::Int32 motion_msg;
   motion_msg.data = BrakeActionCommand;
   ROS_INFO_ONCE("play_demo - brakeAction ");
-  motion_index_pub_.publish(motion_msg);
+//   motion_index_pub_.publish(motion_msg);
 }
 
 // check running of action
