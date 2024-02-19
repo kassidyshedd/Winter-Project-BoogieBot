@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- Launch action_picking node -->
+    <node name="action_pick_node" pkg="state" type="action_pick_node" output="screen" />
+
+    <!-- Launch action_editing node -->
+    <node name="action_edit_node" pkg="state" type="action_edit_node" output="screen" />
+
+    <!-- Launch action_playing node -->
+    <node name="action_play_node" pkg="state" type="action_play_node" output="screen" />
+
+</launch>

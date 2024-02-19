@@ -145,7 +145,7 @@ class ActionPicking
                 action_list_pub.publish(msg1);
                 ROS_INFO_ONCE("Action picking - Published list!");
 
-                ROS_INFO_ONCE("Contents of message");
+                ROS_INFO_ONCE("Action Picking - Contents of message");
                 for (const auto& num : msg1.nums)
                 {
                     ROS_INFO("%ld", num);
@@ -169,7 +169,7 @@ class ActionPicking
                 first_message = false;
                 reset_message = false;
                 
-                ROS_INFO_ONCE("Reset all flags, switching to waiting state");  
+                ROS_INFO_ONCE("Action Picking - Reset all flags, switching to waiting state");  
                 state = WAITING;
             }
         }

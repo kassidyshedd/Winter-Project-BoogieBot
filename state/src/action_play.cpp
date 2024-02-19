@@ -46,7 +46,7 @@ class ActionPlay
         {
             if (!first_message)
             {
-                ROS_INFO("Received message on 'start' topic, switching to PLAYING state.");
+                ROS_INFO("PLAYER - Received message on 'start' topic, switching to PLAYING state.");
                 first_message = true;
                 state = PLAYING;
             }
@@ -70,7 +70,7 @@ class ActionPlay
                 std_msgs::String msg;
                 msg.data = "Done!";
                 done_action_pub.publish(msg);
-                ROS_INFO_ONCE("Published message on 'done' topic, switching to waiting state.");
+                ROS_INFO_ONCE("PLAYER - Published message on 'done' topic, switching to waiting state.");
                 state = WAITING;
             }
         }

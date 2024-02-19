@@ -159,7 +159,7 @@ class ActionEditing
                 first_message = false;
                 reset_message = false;
                 
-                ROS_INFO_ONCE("Reset all flags, switching to waiting state");  
+                ROS_INFO_ONCE("Action Editing - Reset all flags, switching to waiting state");  
                 state = WAITING;
             }
         }
