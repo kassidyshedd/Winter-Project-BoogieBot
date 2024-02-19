@@ -61,6 +61,7 @@ void ActionPlay::process()
   {
     case PlayAction:
     {
+      ROS_INFO_ONCE("case - play action");  
       if (play_list_.size() == 0)
       {
         ROS_WARN("Play List is empty.");
@@ -70,18 +71,21 @@ void ActionPlay::process()
       // action is not running
       if (isActionRunning() == false)
       {
+        ROS_INFO_ONCE("Is running = false");
         // play
         bool result_play = playActionWithSound(play_list_.at(play_index_));
 
         ROS_INFO_COND(!result_play, "Fail to play action script.");
 
         // add play index
+        ROS_INFO_ONCE("add play index");
         int index_to_play = (play_index_ + 1) % play_list_.size();
         play_index_ = index_to_play;
       }
       else
       {
         // wait
+        ROS_INFO_ONCE("waiting");
         return;
       }
       break;
@@ -89,6 +93,7 @@ void ActionPlay::process()
 
     case PauseAction:
     {
+      ROS_INFO_ONCE("pause");
       stopMP3();
       brakeAction();
 
@@ -99,6 +104,7 @@ void ActionPlay::process()
 
     case StopAction:
     {
+      ROS_INFO_ONCE("stop");
       stopMP3();
       stopAction();
 
@@ -224,7 +230,7 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
     // load yaml
     doc = YAML::LoadFile(path.c_str());
   } catch (const std::exception& e)
-  {
+  {process
     ROS_ERROR("Fail to load yaml.");
     return false;
   }
@@ -233,9 +239,11 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
   if (doc[set_name])
   {
     play_list_ = doc[set_name].as<std::vector<int> >();
+    ROS_INFO_ONCE("true");
     return true;
   }
   else
+    ROS_INFO_ONCE("false");
     return false;
 }
 
@@ -271,6 +279,8 @@ void ActionPlay::stopMP3()
 
 void ActionPlay::playAction(int motion_index)
 {
+  ROS_INFO_ONCE("In play action");
+  ROS_INFO_STREAM("%d num", motion_index)
   std_msgs::Int32 motion_msg;
   motion_msg.data = motion_index;
   ROS_INFO_ONCE("play_demo - playAction ");
