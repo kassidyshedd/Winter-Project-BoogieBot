@@ -55,12 +55,24 @@
   <build_depend>std_srvs</build_depend>
   <build_depend>op3_action_editor</build_depend>
   <build_depend>op3_action_module</build_depend>
+  <build_depend>robotis_controller_msgs</build_depend>
+  <build_depend>op3_action_module_msgs</build_depend>
+  <build_depend>robotis_math</build_depend>
+  <build_depend>Boost</build_depend>
+  <build_depend>eigen</build_depend>
+  <build_depend>yaml-cpp</build_depend>
+  <build_depend>op3_manager</build_depend>
+  
+
 
   <exec_depend>roscpp</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>std_srvs</exec_depend>
   <exec_depend>op3_action_editor</exec_depend>
   <exec_depend>op3_action_module</exec_depend>
+  <exec_depend>op3_manager</exec_depend>
+  <exec_depend>ros_madplay_player</exec_depend>
+
 
 
   <!-- The export tag contains other, unspecified, tags -->
