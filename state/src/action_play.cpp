@@ -233,7 +233,7 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
       desired_status = Ready;
       apply_desired = true;
 
-      playSound(default_mp3_path + "Demonstration ready mode.mp3")
+      playSound(default_mp3_path + "Demonstration ready mode.mp3");
     }
   }
   // In ready mode
@@ -241,13 +241,12 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
   {
     if(msg->data == "dance")
     {
-      desired_status = ActionPlay;
+      desired_status = action_play;
       apply_desired = true;
 
       // play sound
       dxlTorqueChecker();
       playSound(default_mp3_path + "Start soccer demonstration.mp3");
-      ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
     }
   }
 }
