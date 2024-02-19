@@ -42,6 +42,7 @@ void ActionPlay::setDemoEnable()
   ROS_INFO_ONCE("playing init pose");
   playAction(InitPose);
 
+  ROS_INFO_ONCE("Move to start process.");
   startProcess(play_list_name_);
 }
 
@@ -121,6 +122,9 @@ void ActionPlay::process()
 void ActionPlay::startProcess(const std::string &set_name)
 {
   ROS_INFO_ONCE("start process");
+  ROS_INFO_STREAM("path %s" << script_path_);
+  ROS_INFO_STREAM("path %s" << set_name);
+
   parseActionScriptSetName(script_path_, set_name);
 
   

@@ -172,6 +172,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       switch (desired_status)
       {
         case ActionPlay:
+        ROS_INFO_ONCE("case action play");
           dxlTorqueChecker();
         //   playSound(default_mp3_path + "Start motion demonstration.mp3");
           break;
