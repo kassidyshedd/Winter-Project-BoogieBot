@@ -4,7 +4,7 @@
 namespace robotis_op
 {
 
-class OPDemo
+class Dance
 {
  public:
   enum Motion_Index
@@ -19,10 +19,10 @@ class OPDemo
     ForGrass = 20,
   };
 
-  OPDemo()
+  Dance()
   {
   }
-  virtual ~OPDemo()
+  virtual ~Dance()
   {
   }
 

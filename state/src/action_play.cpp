@@ -8,7 +8,7 @@
 enum Demo_Status
 {
   Ready = 0,
-  ActionDemo = 3,
+  ActionPlay = 3,
   DemoCount = 4,
 };
 
@@ -41,8 +41,8 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "demo_node");
 
   //create ros wrapper object
-  robotis_op::OPDemo *current_demo = NULL;
-  robotis_op::ActionDemo *action_demo = new robotis_op::ActionDemo();
+  robotis_op::Dance *current_demo = NULL;
+  robotis_op::ActionPlay *action_play = new robotis_op::ActionPlay();
 
   ros::NodeHandle nh(ros::this_node::getName());
 
@@ -101,12 +101,12 @@ int main(int argc, char **argv)
           break;
         }
 
-        case ActionDemo:
+        case ActionPlay:
         {
           if (current_demo != NULL)
             current_demo->setDemoDisable();
 
-          current_demo = action_demo;
+          current_demo = action_play;
           current_demo->setDemoEnable();
           ROS_INFO_COND(DEBUG_PRINT, "[Start] Action Demo");
           break;
@@ -168,7 +168,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status
       switch (desired_status)
       {
-        case ActionDemo:
+        case ActionPlay:
           dxlTorqueChecker();
           playSound(default_mp3_path + "Start motion demonstration.mp3");
           break;
@@ -188,7 +188,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status and changing LED
       switch (desired_status)
       {
-        case ActionDemo:
+        case ActionPlay:
           playSound(default_mp3_path + "Interactive motion mode.mp3");
           setLED(0x04);
           break;
@@ -269,7 +269,7 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
   // In ready mode
   else
   {
-      desired_status = ActionDemo;
+      desired_status = ActionPlay;
       apply_desired = true;
 
       // play sound
