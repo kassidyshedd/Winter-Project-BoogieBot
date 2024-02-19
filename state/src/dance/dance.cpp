@@ -4,7 +4,7 @@ namespace robotis_op
 {
     ActionPlay::ActionPlay()
     : SPIN_RATE(30),
-    play_index_(0);
+    play_index_(0),
     play_status(StopAction)
 
     {
@@ -31,7 +31,7 @@ namespace robotis_op
 
     }
 
-    void ActionPlay::SetDemoEnable()
+    void ActionPlay::setDemoEnable()
     {
         setModule("action_module");
         enable_ = true;
