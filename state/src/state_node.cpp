@@ -228,7 +228,7 @@ class BoogieBot
 
                 ROS_INFO_ONCE("Published message on 'reset' topic, reset all flags, switching to waiting state");  
                 state = WAITING;
-                ROS_INFO_ONCE("%s", state);
+                ROS_INFO_ONCE("%s", enum);
             }
         }
 };
