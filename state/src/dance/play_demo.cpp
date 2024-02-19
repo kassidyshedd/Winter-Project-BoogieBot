@@ -129,6 +129,7 @@ void ActionPlay::startProcess(const std::string &set_name)
 
   
   play_status_ = PlayAction;
+  ROS_INFO_STREAM("play status" << play_status_);
 }
 
 void ActionPlay::resumeProcess()
@@ -238,11 +239,14 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
     ROS_ERROR("Fail to load yaml.");
     return false;
   }
+  ROS_INFO_ONCE("yaml loaded");
 
   // parse action_sound table
   if (doc[set_name])
   {
+    ROS_INFO_ONCE("inside doc[set_name]");
     play_list_ = doc[set_name].as<std::vector<int> >();
+    ROS_INFO_STREAM("playlist" << play_list_);
     return true;
   }
   else
