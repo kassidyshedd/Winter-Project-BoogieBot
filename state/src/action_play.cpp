@@ -241,7 +241,7 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
   {
     if(msg->data == "dance")
     {
-      desired_status = action_play;
+      desired_status = Dance;
       apply_desired = true;
 
       // play sound
