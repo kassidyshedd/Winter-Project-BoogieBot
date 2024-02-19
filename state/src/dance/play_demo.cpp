@@ -230,7 +230,7 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
     // load yaml
     doc = YAML::LoadFile(path.c_str());
   } catch (const std::exception& e)
-  {process
+  {
     ROS_ERROR("Fail to load yaml.");
     return false;
   }
@@ -239,7 +239,6 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
   if (doc[set_name])
   {
     play_list_ = doc[set_name].as<std::vector<int> >();
-    ROS_INFO_ONCE("true");
     return true;
   }
   else
@@ -279,7 +278,6 @@ void ActionPlay::stopMP3()
 
 void ActionPlay::playAction(int motion_index)
 {
-  ROS_INFO_ONCE("In play action");
   std_msgs::Int32 motion_msg;
   motion_msg.data = motion_index;
   ROS_INFO_ONCE("play_demo - playAction ");
