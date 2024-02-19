@@ -35,11 +35,11 @@
 namespace robotis_op
 {
 
-class ActionDemo : public OPDemo
+class ActionPlay : public OPDemo
 {
  public:
-  ActionDemo();
-  ~ActionDemo();
+  ActionPlay();
+  ~ActionPlay();
 
   void setDemoEnable();
   void setDemoDisable();

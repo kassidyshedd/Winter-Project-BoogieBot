@@ -21,7 +21,7 @@
 namespace robotis_op
 {
 
-ActionDemo::ActionDemo()
+ActionPlay::ActionPlay()
     : SPIN_RATE(30),
       DEBUG_PRINT(false),
       play_index_(0),
@@ -37,19 +37,19 @@ ActionDemo::ActionDemo()
   std::string default_play_list = "default";
   play_list_name_ = nh.param<std::string>("action_script_play_list", default_play_list);
 
-  demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionDemo::demoCommandCallback, this);
+  demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
 
   parseActionScript (script_path_);
 
-  boost::thread queue_thread = boost::thread(boost::bind(&ActionDemo::callbackThread, this));
-  boost::thread process_thread = boost::thread(boost::bind(&ActionDemo::processThread, this));
+  boost::thread queue_thread = boost::thread(boost::bind(&ActionPlay::callbackThread, this));
+  boost::thread process_thread = boost::thread(boost::bind(&ActionPlay::processThread, this));
 }
 
-ActionDemo::~ActionDemo()
+ActionPlay::~ActionPlay()
 {
 }
 
-void ActionDemo::setDemoEnable()
+void ActionPlay::setDemoEnable()
 {
   setModuleToDemo("action_module");
 
@@ -62,7 +62,7 @@ void ActionDemo::setDemoEnable()
   startProcess(play_list_name_);
 }
 
-void ActionDemo::setDemoDisable()
+void ActionPlay::setDemoDisable()
 {
   stopProcess();
 
@@ -71,7 +71,7 @@ void ActionDemo::setDemoDisable()
   play_list_.resize(0);
 }
 
-void ActionDemo::process()
+void ActionPlay::process()
 {
   switch (play_status_)
   {
@@ -128,30 +128,30 @@ void ActionDemo::process()
   }
 }
 
-void ActionDemo::startProcess(const std::string &set_name)
+void ActionPlay::startProcess(const std::string &set_name)
 {
   parseActionScriptSetName(script_path_, set_name);
 
   play_status_ = PlayAction;
 }
 
-void ActionDemo::resumeProcess()
+void ActionPlay::resumeProcess()
 {
   play_status_ = PlayAction;
 }
 
-void ActionDemo::pauseProcess()
+void ActionPlay::pauseProcess()
 {
   play_status_ = PauseAction;
 }
 
-void ActionDemo::stopProcess()
+void ActionPlay::stopProcess()
 {
   play_index_ = 0;
   play_status_ = StopAction;
 }
 
-void ActionDemo::processThread()
+void ActionPlay::processThread()
 {
   //set node loop rate
   ros::Rate loop_rate(SPIN_RATE);
@@ -167,7 +167,7 @@ void ActionDemo::processThread()
   }
 }
 
-void ActionDemo::callbackThread()
+void ActionPlay::callbackThread()
 {
   ros::NodeHandle nh(ros::this_node::getName());
 
@@ -176,7 +176,7 @@ void ActionDemo::callbackThread()
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
   play_sound_pub_ = nh.advertise<std_msgs::String>("/play_sound_file", 0);
 
-  buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionDemo::buttonHandlerCallback, this);
+  buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionPlay::buttonHandlerCallback, this);
 
   is_running_client_ = nh.serviceClient<op3_action_module_msgs::IsRunning>("/robotis/action/is_running");
   set_joint_module_client_ = nh.serviceClient<robotis_controller_msgs::SetModule>("/robotis/set_present_ctrl_modules");
@@ -189,7 +189,7 @@ void ActionDemo::callbackThread()
   }
 }
 
-void ActionDemo::parseActionScript(const std::string &path)
+void ActionPlay::parseActionScript(const std::string &path)
 {
   YAML::Node doc;
 
@@ -219,7 +219,7 @@ void ActionDemo::parseActionScript(const std::string &path)
     play_list_ = doc["default"].as<std::vector<int> >();
 }
 
-bool ActionDemo::parseActionScriptSetName(const std::string &path, const std::string &set_name)
+bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::string &set_name)
 {
 
   YAML::Node doc;
@@ -244,7 +244,7 @@ bool ActionDemo::parseActionScriptSetName(const std::string &path, const std::st
     return false;
 }
 
-bool ActionDemo::playActionWithSound(int motion_index)
+bool ActionPlay::playActionWithSound(int motion_index)
 {
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
   if (map_it == action_sound_table_.end())
@@ -258,7 +258,7 @@ bool ActionDemo::playActionWithSound(int motion_index)
   return true;
 }
 
-void ActionDemo::playMP3(std::string &path)
+void ActionPlay::playMP3(std::string &path)
 {
   std_msgs::String sound_msg;
   sound_msg.data = path;
@@ -266,7 +266,7 @@ void ActionDemo::playMP3(std::string &path)
   play_sound_pub_.publish(sound_msg);
 }
 
-void ActionDemo::stopMP3()
+void ActionPlay::stopMP3()
 {
   std_msgs::String sound_msg;
   sound_msg.data = "";
@@ -274,7 +274,7 @@ void ActionDemo::stopMP3()
   play_sound_pub_.publish(sound_msg);
 }
 
-void ActionDemo::playAction(int motion_index)
+void ActionPlay::playAction(int motion_index)
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = motion_index;
@@ -282,7 +282,7 @@ void ActionDemo::playAction(int motion_index)
   motion_index_pub_.publish(motion_msg);
 }
 
-void ActionDemo::stopAction()
+void ActionPlay::stopAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = StopActionCommand;
@@ -290,7 +290,7 @@ void ActionDemo::stopAction()
   motion_index_pub_.publish(motion_msg);
 }
 
-void ActionDemo::brakeAction()
+void ActionPlay::brakeAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = BrakeActionCommand;
@@ -299,7 +299,7 @@ void ActionDemo::brakeAction()
 }
 
 // check running of action
-bool ActionDemo::isActionRunning()
+bool ActionPlay::isActionRunning()
 {
   op3_action_module_msgs::IsRunning is_running_srv;
 
@@ -319,7 +319,7 @@ bool ActionDemo::isActionRunning()
   return false;
 }
 
-void ActionDemo::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
+void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
 {
   if (enable_ == false)
     return;
@@ -356,13 +356,13 @@ void ActionDemo::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   }
 }
 
-void ActionDemo::setModuleToDemo(const std::string &module_name)
+void ActionPlay::setModuleToDemo(const std::string &module_name)
 {
   callServiceSettingModule(module_name);
   ROS_INFO_STREAM("enable module : " << module_name);
 }
 
-void ActionDemo::callServiceSettingModule(const std::string &module_name)
+void ActionPlay::callServiceSettingModule(const std::string &module_name)
 {
     robotis_controller_msgs::SetModule set_module_srv;
     set_module_srv.request.module_name = module_name;
@@ -376,7 +376,7 @@ void ActionDemo::callServiceSettingModule(const std::string &module_name)
     return ;
 }
 
-void ActionDemo::demoCommandCallback(const std_msgs::String::ConstPtr &msg)
+void ActionPlay::demoCommandCallback(const std_msgs::String::ConstPtr &msg)
 {
   if (enable_ == false)
     return;
