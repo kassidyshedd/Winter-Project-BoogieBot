@@ -72,6 +72,7 @@
   <exec_depend>op3_action_module</exec_depend>
   <exec_depend>op3_manager</exec_depend>
   <exec_depend>ros_madplay_player</exec_depend>
+  <exec_depend>robotis_controller_msgs</exec_depend>
 
 
 
