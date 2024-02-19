@@ -4,7 +4,7 @@
 enum State{
     WAITING,
     PLAYING,
-    DONE
+    RESET
 };
 
 class ActionPlay
