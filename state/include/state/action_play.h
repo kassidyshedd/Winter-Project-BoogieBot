@@ -16,8 +16,8 @@
 
 /* Author: Kayman Jung */
 
-#ifndef ACTION_DEMO_H_
-#define ACTION_DEMO_H_
+#ifndef ACTION_PLAY_H_
+#define ACTION_PLAY_H_
 
 #include <ros/ros.h>
 #include <ros/package.h>
