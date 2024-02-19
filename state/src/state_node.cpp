@@ -215,7 +215,7 @@ class BoogieBot
                 std_msgs::String msg;
                 msg.data = "start";
                 button_pub.publish(msg);
-                ROS_INFO_ONCE("State - mimiced button.")
+                ROS_INFO_ONCE("State - mimiced button.");
                 
             }
 
