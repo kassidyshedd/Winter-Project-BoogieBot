@@ -280,7 +280,7 @@ void ActionPlay::stopMP3()
 void ActionPlay::playAction(int motion_index)
 {
   ROS_INFO_ONCE("In play action");
-  ROS_INFO_STREAM("%d num" << motion_index)
+  ROS_INFO_STREAM("%d num" << motion_index);
   std_msgs::Int32 motion_msg;
   motion_msg.data = motion_index;
   ROS_INFO_ONCE("play_demo - playAction ");
