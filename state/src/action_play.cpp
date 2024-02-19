@@ -142,13 +142,13 @@ int main(int argc, char **argv)
 
 // starting callback function
 void startingCallback(const std_msgs::String::ConstPtr &msg)
-{   ROS_INFO("ActionPlay - recieved start message")
+{   ROS_INFO("ActionPlay - recieved start message");
     desired_status = ActionPlay;
     apply_desired = true;
 
     playSound(default_mp3_path + "Start motion demonstration.mp3");
     setLED(0x04);
-    ROS_INFO("motion demo?")
+    ROS_INFO("motion demo?");
 }
 
 
