@@ -13,8 +13,30 @@ find_package(catkin REQUIRED
     std_srvs
     op3_action_editor
     op3_action_module
+    robotis_controller_msgs
+    op3_action_module_msgs
+    robotis_math
     message_generation
 )
+
+find_package(Boost REQUIRED COMPONENTS thread)
+find_package(Eigen3 REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(YAML_CPP REQUIRED yaml-cpp)
+find_path(YAML_CPP_INCLUDE_DIR
+  NAMES yaml_cpp.h
+  PATHS ${YAML_CPP_INCLUDE_DIRS}
+)
+find_library(YAML_CPP_LIBRARY
+  NAMES YAML_CPP
+  PATHS ${YAML_CPP_LIBRARY_DIRS}
+)
+link_directories(${YAML_CPP_LIBRARY_DIRS})
+
+if(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
+add_definitions(-DHAVE_NEW_YAMLCPP)
+endif(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -107,7 +129,8 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES state
- CATKIN_DEPENDS op3_action_editor op3_action_module
+ CATKIN_DEPENDS op3_action_editor op3_action_module robotis_controller_msgs op3_action_module_msgs robotis_math
+ DEPENDS Boost EIGEN3
 #  DEPENDS system_lib
 )
 
@@ -120,6 +143,9 @@ catkin_package(
 include_directories(
 include
 ${catkin_INCLUDE_DIRS}
+${Boost_INCLUDE_DIRS}
+${EIGEN3_INCLUDE_DIRS}
+${YAML_CPP_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -153,18 +179,30 @@ add_executable(action_pick_node src/action_pick.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+  ${Boost_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${YAML_CPP_INCLUDE_DIRS}
 )
 
 target_link_libraries(action_edit_node
   ${catkin_LIBRARIES}
+  ${Boost_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${YAML_CPP_INCLUDE_DIRS}
 )
 
 target_link_libraries(action_play_node
   ${catkin_LIBRARIES}
+  ${Boost_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${YAML_CPP_INCLUDE_DIRS}
 )
 
 target_link_libraries(action_pick_node
   ${catkin_LIBRARIES}
+  ${Boost_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${YAML_CPP_INCLUDE_DIRS}
 )
 #############
 ## Install ##
