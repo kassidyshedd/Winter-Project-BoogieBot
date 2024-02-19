@@ -159,6 +159,11 @@ void ActionPlay::callbackThread()
   // subscriber & publisher
   module_control_pub_ = nh.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 0);
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
+  std_msgs::Int32 motion_msg;
+  motion_msg.data = 0;
+  motion_index_pub_.publish(motion_msg);
+  ROS_INFO_ONCE("Published initial motion");
+
   play_sound_pub_ = nh.advertise<std_msgs::String>("/play_sound_file", 0);
 
   buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionPlay::buttonHandlerCallback, this);
