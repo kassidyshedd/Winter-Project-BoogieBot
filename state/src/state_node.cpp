@@ -94,8 +94,8 @@ class BoogieBot
         }
 
         void num_tempo_callback(const std_msgs::Int64::ConstPtr& msg)
-        {
-            ROS_INFO_ONCE("Inside num_tempo_callback");
+        {   ROS_INFO_STREAM(first_message_tempo);
+            ROS_INFO("Inside num_tempo_callback");
             if (!first_message_tempo)
             {
                 ROS_INFO("Recieved meessage on 'state_num_tempo' topic, switch to action_list state.");
@@ -222,6 +222,7 @@ class BoogieBot
                 action_play_pub.publish(msg);
 
                 first_message_tempo = false;
+                ROS_INFO_STREAM(first_message_tempo)
                 first_message_actionlist = false;
                 first_message_actionedit = false;
                 first_message_actionplay = false;
