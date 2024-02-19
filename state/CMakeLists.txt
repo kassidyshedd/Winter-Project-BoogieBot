@@ -138,6 +138,7 @@ ${catkin_INCLUDE_DIRS}
 add_executable(${PROJECT_NAME}_node src/state_node.cpp)
 add_executable(action_edit_node src/action_edit.cpp)
 add_executable(action_play_node src/action_play.cpp)
+add_executable(action_pick_node src/action_pick.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -162,6 +163,9 @@ target_link_libraries(action_play_node
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(action_pick_node
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
