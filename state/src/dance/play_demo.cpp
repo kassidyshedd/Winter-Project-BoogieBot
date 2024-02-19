@@ -275,7 +275,7 @@ void ActionPlay::stopAction()
 void ActionPlay::brakeAction()
 {
   std_msgs::Int32 motion_msg;
-  motion_msg.data = BrakeActionCommand;
+//   motion_msg.data = BrakeActionCommand;
   ROS_INFO_ONCE("play_demo - brakeAction ");
 //   motion_index_pub_.publish(motion_msg);
 }
