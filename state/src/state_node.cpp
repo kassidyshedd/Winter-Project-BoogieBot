@@ -189,7 +189,7 @@ class BoogieBot
                 // msg.data = "Ready to edit actions";
                 // action_edit_pub.publish(msg);
 
-                state::RandomList list_msg;
+                state::RandomList list_msg; ROS_INFO_ONCE("-------------")
                 list_msg.nums = list;
                 action_edit_pub.publish(list_msg);
                 ROS_INFO_ONCE("Published message on 'send_list' topic, waiting for action_editor node. ");             
@@ -228,9 +228,9 @@ class BoogieBot
 
                 ROS_INFO_ONCE("Published message on 'reset' topic, reset all flags, switching to waiting state");  
                 state = WAITING;
-                ROS_INFO_ONCE("-------------")
-                ROS_INFO_ONCE("-------------")
-                ROS_INFO_ONCE("-------------")
+                ROS_INFO_ONCE("-------------");
+                ROS_INFO_ONCE("-------------");
+                ROS_INFO_ONCE("-------------");
                 // ROS_INFO_STREAM(state);
             }
         }
