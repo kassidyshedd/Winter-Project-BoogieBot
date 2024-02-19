@@ -1,4 +1,5 @@
 #include "state/action_play.h"
+#include <boost/algorithm/string/join.hpp>
 
 namespace robotis_op
 {
