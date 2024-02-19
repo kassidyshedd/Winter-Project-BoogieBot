@@ -179,30 +179,30 @@ add_executable(action_pick_node src/action_pick.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${YAML_CPP_INCLUDE_DIRS}
+  ${Boost_LIBRARIES}
+  ${EIGEN3_LIBRARIES}
+  ${YAML_CPP_LIBRARIES}
 )
 
 target_link_libraries(action_edit_node
   ${catkin_LIBRARIES}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${YAML_CPP_INCLUDE_DIRS}
+  ${Boost_LIBRARIES}
+  ${EIGEN3_LIBRARIES}
+  ${YAML_CPP_LIBRARIES}
 )
 
 target_link_libraries(action_play_node
   ${catkin_LIBRARIES}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${YAML_CPP_INCLUDE_DIRS}
+  ${Boost_LIBRARIES}
+  ${EIGEN3_LIBRARIES}
+  ${YAML_CPP_LIBRARIES}
 )
 
 target_link_libraries(action_pick_node
   ${catkin_LIBRARIES}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${YAML_CPP_INCLUDE_DIRS}
+  ${Boost_LIBRARIES}
+  ${EIGEN3_LIBRARIES}
+  ${YAML_CPP_LIBRARIES}
 )
 #############
 ## Install ##
