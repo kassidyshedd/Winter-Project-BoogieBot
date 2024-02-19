@@ -21,9 +21,6 @@ void dxlTorqueChecker();
 
 void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg);
 
-// callback for stating subscription ---
-void startingCallback(const std_msgs::String::ConstPtr &msg);
-
 const int SPIN_RATE = 30;
 const bool DEBUG_PRINT = false;
 
@@ -57,9 +54,7 @@ int main(int argc, char **argv)
   ros::Subscriber mode_command_sub = nh.subscribe("/robotis/mode_command", 1, demoModeCommandCallback);
 
   default_mp3_path = ros::package::getPath("op3_demo") + "/data/mp3/";
-
-  // Subsribe to starting topic, which causes switch to actionplay mode ---
-//   ros::Subscriber action_play_sub = nh.subscribe("STARTING", 1, startingCallback);
+  
 
   ros::start();
 
@@ -139,19 +134,6 @@ int main(int argc, char **argv)
   return 0;
 }
 
-
-// // starting callback function
-// void startingCallback(const std_msgs::String::ConstPtr &msg)
-// {   ROS_INFO("ActionPlay - recieved start message");
-//     desired_status = ActionPlay;
-//     apply_desired = true;
-
-//     playSound(default_mp3_path + "Start motion demonstration.mp3");
-//     setLED(0x04);
-//     ROS_INFO("motion demo?");
-// }
-
-
 void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
 {
   if(apply_desired == true)
@@ -178,9 +160,8 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   // ready to start demo
   else
   {
-    if (msg->data == "start");
+    if (msg->data == "start")
     {
-      ROS_INFO_ONCE("Recieved start message");
       // select current demo
       desired_status = (desired_status == Ready) ? desired_status + 1 : desired_status;
       apply_desired = true;
