@@ -137,7 +137,8 @@ class BoogieBot
         }
 
         void timer_callback()
-        {   ROS_INFO_STREAM(state);
+        {   
+            // ROS_INFO_STREAM(state);
             // Waiting for further instruction
             if (state == WAITING) 
             {
