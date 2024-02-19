@@ -1,10 +1,10 @@
-#ifndef DANCE_H_
-#define DANCE_H_
+#ifndef OP_DEMO_H_
+#define OP_DEMO_H_
 
 namespace robotis_op
 {
 
-class Dance
+class OPDemo
 {
  public:
   enum Motion_Index
@@ -19,10 +19,10 @@ class Dance
     ForGrass = 20,
   };
 
-  Dance()
+  OPDemo()
   {
   }
-  virtual ~Dance()
+  virtual ~OPDemo()
   {
   }
 
@@ -39,4 +39,4 @@ class Dance
 
 } /* namespace robotis_op */
 
-#endif /* DANCE_H_ */
+#endif /* OP_DEMO_H_ */

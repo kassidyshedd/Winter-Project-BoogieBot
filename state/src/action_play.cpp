@@ -1,14 +1,15 @@
-#include "ros/ros.h"
-#include "std_msgs/String.h"
+#include <ros/ros.h>
+#include <std_msgs/String.h>
 
-#include"state/action_play.h"
+#include "state/action_play.h"
 #include "robotis_math/robotis_linear_algebra.h"
 #include "robotis_controller_msgs/SyncWriteItem.h"
 
-enum Status
+enum Demo_Status
 {
   Ready = 0,
-  DanceDEMO = 1,
+  ActionPlay = 3,
+  DemoCount = 4,
 };
 
 void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
@@ -21,6 +22,7 @@ void dxlTorqueChecker();
 void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg);
 
 const int SPIN_RATE = 30;
+const bool DEBUG_PRINT = false;
 
 ros::Publisher init_pose_pub;
 ros::Publisher play_sound_pub;
@@ -32,15 +34,15 @@ int current_status = Ready;
 int desired_status = Ready;
 bool apply_desired = false;
 
-//node mainconst bool DEBUG_PRINT = false;
+//node main
 int main(int argc, char **argv)
 {
   //init ros
-  ros::init(argc, argv, "dance_node");
+  ros::init(argc, argv, "demo_node");
 
   //create ros wrapper object
-  robotis_op::Dance *current_demo = NULL;
-  robotis_op::DanceDEMO *action_play = new robotis_op::ActionPlay();
+  robotis_op::OPDemo *current_demo = NULL;
+  robotis_op::ActionPlay *action_play = new robotis_op::ActionPlay();
 
   ros::NodeHandle nh(ros::this_node::getName());
 
@@ -67,12 +69,15 @@ int main(int argc, char **argv)
     if (checkManagerRunning(manager_name) == true)
     {
       break;
+      ROS_INFO_COND(DEBUG_PRINT, "Succeed to connect");
     }
     ROS_WARN("Waiting for op3 manager");
   }
 
   // init procedure
   playSound(default_mp3_path + "Demonstration ready mode.mp3");
+  // turn on R/G/B LED
+  setLED(0x01 | 0x02 | 0x04);
 
   //node loop
   while (ros::ok())
@@ -92,17 +97,18 @@ int main(int argc, char **argv)
 
           goInitPose();
 
+          ROS_INFO_COND(DEBUG_PRINT, "[Go to Demo READY!]");
           break;
         }
 
-        case Dance:
+        case ActionPlay:
         {
           if (current_demo != NULL)
             current_demo->setDemoDisable();
 
           current_demo = action_play;
           current_demo->setDemoEnable();
-
+          ROS_INFO_COND(DEBUG_PRINT, "[Start] Action Demo");
           break;
         }
 
@@ -142,6 +148,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       apply_desired = true;
 
       playSound(default_mp3_path + "Demonstration ready mode.mp3");
+      setLED(0x01 | 0x02 | 0x04);
     }
     else if (msg->data == "user_long")
     {
@@ -161,14 +168,36 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status
       switch (desired_status)
       {
-        case Dance:
+        case ActionPlay:
           dxlTorqueChecker();
-          playSound(default_mp3_path + "Start soccer demonstration.mp3");
+          playSound(default_mp3_path + "Start motion demonstration.mp3");
           break;
 
         default:
           break;
       }
+
+      ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
+    }
+    else if (msg->data == "mode")
+    {
+      // change to next demo
+      desired_status = (desired_status + 1) % DemoCount;
+      desired_status = (desired_status == Ready) ? desired_status + 1 : desired_status;
+
+      // sound out desired status and changing LED
+      switch (desired_status)
+      {
+        case ActionPlay:
+          playSound(default_mp3_path + "Interactive motion mode.mp3");
+          setLED(0x04);
+          break;
+
+        default:
+          break;
+      }
+
+      ROS_INFO_COND(DEBUG_PRINT, "= Demo Mode : %d", desired_status);
     }
   }
 }
@@ -234,135 +263,21 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
       apply_desired = true;
 
       playSound(default_mp3_path + "Demonstration ready mode.mp3");
+      setLED(0x01 | 0x02 | 0x04);
     }
   }
   // In ready mode
   else
   {
-    if(msg->data == "dance")
+    else if(msg->data == "action")
     {
-      desired_status = Dance;
+      desired_status = ActionPlay;
       apply_desired = true;
 
       // play sound
       dxlTorqueChecker();
-      playSound(default_mp3_path + "Start soccer demonstration.mp3");
+      playSound(default_mp3_path + "Start motion demonstration.mp3");
+      ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
     }
   }
 }
-
-
-
-
-
-// // Create states
-// enum State{
-//     WAITING,
-//     PLAYING,
-//     DONE
-// };
-
-// enum staus{
-//     Ready = 0,
-//     DANCE = 1
-// };
-
-
-// void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
-// void goInitPose();
-// void playSound(const std::string &path);
-// void setLED(int led);
-// bool checkManagerRunning(std::string& manager_name);
-// void dxlTorqueChecker();
-
-// void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg);
-
-// const int SPIN_RATE = 30;
-
-// ros::Publisher init_pose_pub;
-// ros::Publisher play_sound_pub;
-// ros::Publisher led_pub;
-// ros::Publisher dxl_torque_pub;
-
-// std::string default_mp3_path = "";
-// int current_status = Ready;
-// int desired_status = Ready;
-// bool apply_desired = false;
-
-
-// class ActionPlay
-// {
-//     public:
-//         ActionPlay() : nh(), state(WAITING)
-//         {   
-//             // Publishers
-//             // Done action publisher
-//             done_action_pub = nh.advertise<std_msgs::String>("done", 10);
-
-//             // Subscribers
-//             // Start action subscriber
-//             start_action_sub = nh.subscribe("startplay", 10, &ActionPlay::start_callback, this);
-//         }
-        
-
-//         void run()
-//         {
-//             ros::Rate loop_rate(100);
-//             while (ros::ok())
-//             {
-//                 timer_callback();
-//                 ros::spinOnce();
-//                 loop_rate.sleep();
-//             }
-//         }
-//     private:
-//         ros::NodeHandle nh;
-
-//         ros::Publisher done_action_pub;
-
-//         ros::Subscriber start_action_sub;
-
-//         State state;
-//         bool first_message;
-
-//         void start_callback(const std_msgs::String::ConstPtr& msg)
-//         {
-//             if (!first_message)
-//             {
-//                 ROS_INFO("PLAYER - Received message on 'start' topic, switching to PLAYING state.");
-//                 first_message = true;
-//                 state = PLAYING;
-//             }
-//         }
-
-//         void timer_callback()
-//         {
-//             if (state == WAITING)
-//             {
-//                 ROS_INFO_ONCE("PLAYER - Waiting State.");
-//             }
-//             else if (state == PLAYING)
-//             {
-//                 ROS_INFO_ONCE("PLAYER - Playing State.");
-//                 state = DONE;
-//             }
-//             else if (state == DONE)
-//             {
-//                 ROS_INFO_ONCE("PLAYER - Done State");
-
-//                 std_msgs::String msg;
-//                 msg.data = "Done!";
-//                 done_action_pub.publish(msg);
-//                 ROS_INFO_ONCE("PLAYER - Published message on 'done' topic, switching to waiting state.");
-//                 state = WAITING;
-//             }
-//         }
-// };
-
-// int main(int argc, char* argv[])
-// {
-//     ros::init(argc, argv, "actionplay_node");
-//     ActionPlay actionPlay;
-//     actionPlay.run();
-//     return 0;
-// }

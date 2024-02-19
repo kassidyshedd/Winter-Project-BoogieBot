@@ -1,96 +1,117 @@
-#ifndef ACTION_PLAY_H_
-#define ACTION_PLAY_H_
+/*******************************************************************************
+* Copyright 2017 ROBOTIS CO., LTD.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*******************************************************************************/
 
-#include "ros/ros.h"
-#include "ros/package.h"
-#include "std_msgs/String.h"
-#include "std_msgs/Int32.h"
-#include "boost/thread.hpp"
-#include "yaml-cpp/yaml.h"
+/* Author: Kayman Jung */
 
-#include "state/dance.h"
+#ifndef ACTION_DEMO_H_
+#define ACTION_DEMO_H_
+
+#include <ros/ros.h>
+#include <ros/package.h>
+#include <std_msgs/Int32.h>
+#include <std_msgs/String.h>
+
+#include <boost/thread.hpp>
+#include <yaml-cpp/yaml.h>
+
+#include "state/op_demo.h"
 #include "robotis_controller_msgs/JointCtrlModule.h"
 #include "robotis_controller_msgs/SetModule.h"
 #include "op3_action_module_msgs/IsRunning.h"
 
-
 namespace robotis_op
 {
-    class ActionPlay : public Dance
-    {
-        public:
-            ActionPlay();
-            ~ActionPlay();
 
-            void setDemoEnable();
-            void setDemoDisable();
+class ActionDemo : public OPDemo
+{
+ public:
+  ActionDemo();
+  ~ActionDemo();
 
-        protected:
-            enum ActionCommandIndex
-            {
-                BrakeActionCommand = -2,
-                StopActionCommand = -1,
-            };
+  void setDemoEnable();
+  void setDemoDisable();
 
-            enum ActionStatus
-            {
-                PlayAction = 1,
-                PauseAction = 2,
-                StopAction = 3,
-                ReadyAction = 4,
-            };
+ protected:
+  enum ActionCommandIndex
+  {
+    BrakeActionCommand = -2,
+    StopActionCommand = -1,
+  };
 
-            const int SPIN_RATE;
+  enum ActionStatus
+  {
+    PlayAction = 1,
+    PauseAction = 2,
+    StopAction = 3,
+    ReadyAction = 4,
+  };
 
-            void processThread();
-            void callbackThread();
+  const int SPIN_RATE;
+  const bool DEBUG_PRINT;
 
-            void process();
-            void startProcess(const std::string &set_name = "default");
-            void resumeProcess();
-            void pauseProcess();
-            void stopProcess();
+  void processThread();
+  void callbackThread();
 
-            void handleStatus();
+  void process();
+  void startProcess(const std::string &set_name = "default");
+  void resumeProcess();
+  void pauseProcess();
+  void stopProcess();
 
-            void parseActionScript(const std::string &path);
-            bool parseActionScriptSetName(const std::string &path, const std::string &set_name);
+  void handleStatus();
 
-            bool playActionWithSound(int motion_index);
+  void parseActionScript(const std::string &path);
+  bool parseActionScriptSetName(const std::string &path, const std::string &set_name);
 
-            void playMP3(std::string &path);
-            void stopMP3();
+  bool playActionWithSound(int motion_index);
 
-            void playAction(int motion_index);
-            void stopAction();
-            void brakeAction();
-            bool isActionRunning();
+  void playMP3(std::string &path);
+  void stopMP3();
 
-            void setModuleToDemo(const std::string &module_name);
-            void callServiceSettingModule(const std::string &module_name);
-            void actionSetNameCallback(const std_msgs::String::ConstPtr& msg);
-            void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
-            void demoCommandCallback(const std_msgs::String::ConstPtr &msg);
+  void playAction(int motion_index);
+  void stopAction();
+  void brakeAction();
+  bool isActionRunning();
 
-            ros::Publisher module_control_pub_;
-            ros::Publisher motion_index_pub_;
-            ros::Publisher play_sound_pub_;
+  void setModuleToDemo(const std::string &module_name);
+  void callServiceSettingModule(const std::string &module_name);
+  void actionSetNameCallback(const std_msgs::String::ConstPtr& msg);
+  void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
+  void demoCommandCallback(const std_msgs::String::ConstPtr &msg);
 
-            ros::Subscriber buttuon_sub_;
-            ros::Subscriber demo_command_sub_;
+  ros::Publisher module_control_pub_;
+  ros::Publisher motion_index_pub_;
+  ros::Publisher play_sound_pub_;
 
-            ros::ServiceClient is_running_client_;
-            ros::ServiceClient set_joint_module_client_;
+  ros::Subscriber buttuon_sub_;
+  ros::Subscriber demo_command_sub_;
 
-            std::map<int, std::string> action_sound_table_;
-            std::vector<int> play_list_;
+  ros::ServiceClient is_running_client_;
+  ros::ServiceClient set_joint_module_client_;
 
-            std::string script_path_;
-            std::string play_list_name_;
-            int play_index_;
+  std::map<int, std::string> action_sound_table_;
+  std::vector<int> play_list_;
 
-            int play_status_;
-    };
-}
+  std::string script_path_;
+  std::string play_list_name_;
+  int play_index_;
 
-#endif
+  int play_status_;
+};
+
+} /* namespace robotis_op */
+
+#endif /* ACTION_DEMO_H_ */
