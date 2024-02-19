@@ -10,7 +10,7 @@ class Dance
   enum Motion_Index
   {
     InitPose = 1,
-    WalkingReady = 9,
+    WalkingReady = 144,
     GetUpFront = 122,
     GetUpBack = 123,
     RightKick = 121,
