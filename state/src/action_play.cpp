@@ -268,9 +268,6 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
   }
   // In ready mode
   else
-  {
-    else if(msg->data == "action")
-    {
       desired_status = ActionPlay;
       apply_desired = true;
 
@@ -278,6 +275,4 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
       dxlTorqueChecker();
       playSound(default_mp3_path + "Start motion demonstration.mp3");
       ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
-    }
-  }
 }
