@@ -56,7 +56,7 @@ void ActionPlay::setDemoDisable()
 
 void ActionPlay::process()
 { 
-  ROS_INFO("In process");
+  ROS_INFO_ONCE("In process");
   switch (play_status_)
   {
     case PlayAction:
@@ -155,17 +155,17 @@ void ActionPlay::processThread()
 
 void ActionPlay::callbackThread()
 {
-  ROS_INFO("in callback");
+  ROS_INFO_ONCE("in callback");
   ros::NodeHandle nh(ros::this_node::getName());
-  ROS_INFO("node created");
+  ROS_INFO_ONCE("node created");
 
   // subscriber & publisher
   module_control_pub_ = nh.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 0);
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
-  ROS_INFO("pub create");
+  ROS_INFO_ONCE("pub create");
   std_msgs::Int32 motion_msg;
   motion_msg.data = 0;
-  ROS_INFO("about to pub");
+  ROS_INFO_ONCE("about to pub");
   motion_index_pub_.publish(motion_msg);
   ROS_INFO_ONCE("Published initial motion");
 
