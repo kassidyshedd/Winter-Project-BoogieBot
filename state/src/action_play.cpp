@@ -1,14 +1,14 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 
-#include "state/action_play.h"
+#include "op3_demo/action_play.h"
 #include "robotis_math/robotis_linear_algebra.h"
 #include "robotis_controller_msgs/SyncWriteItem.h"
 
 enum Demo_Status
 {
   Ready = 0,
-  ActionPlay = 3,
+  ActionDemo = 3,
   DemoCount = 4,
 };
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
   //create ros wrapper object
   robotis_op::OPDemo *current_demo = NULL;
-  robotis_op::ActionPlay *action_play = new robotis_op::ActionPlay();
+  robotis_op::ActionDemo *action_demo = new robotis_op::ActionDemo();
 
   ros::NodeHandle nh(ros::this_node::getName());
 
@@ -101,12 +101,12 @@ int main(int argc, char **argv)
           break;
         }
 
-        case ActionPlay:
+        case ActionDemo:
         {
           if (current_demo != NULL)
             current_demo->setDemoDisable();
 
-          current_demo = action_play;
+          current_demo = action_demo;
           current_demo->setDemoEnable();
           ROS_INFO_COND(DEBUG_PRINT, "[Start] Action Demo");
           break;
@@ -168,7 +168,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status
       switch (desired_status)
       {
-        case ActionPlay:
+        case ActionDemo:
           dxlTorqueChecker();
           playSound(default_mp3_path + "Start motion demonstration.mp3");
           break;
@@ -188,7 +188,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status and changing LED
       switch (desired_status)
       {
-        case ActionPlay:
+        case ActionDemo:
           playSound(default_mp3_path + "Interactive motion mode.mp3");
           setLED(0x04);
           break;
@@ -268,11 +268,13 @@ void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
   }
   // In ready mode
   else
-      desired_status = ActionPlay;
+  {
+      desired_status = ActionDemo;
       apply_desired = true;
 
       // play sound
       dxlTorqueChecker();
       playSound(default_mp3_path + "Start motion demonstration.mp3");
       ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
+  }
 }
