@@ -8,7 +8,7 @@
 #include "boost/thread.hpp"
 #include "yaml-cpp/yaml.h"
 
-// #include "state/dance_demo.h"
+#include "state/dance.h"
 #include "robotis_controller_msgs/JointCtrlModule.h"
 #include "robotis_controller_msgs/SetModule.h"
 #include "op3_action_module_msgs/IsRunning.h"

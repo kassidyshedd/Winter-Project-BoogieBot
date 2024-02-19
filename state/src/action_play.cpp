@@ -39,7 +39,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "dance_node");
 
   //create ros wrapper object
-  robotis_op::OPDemo *current_demo = NULL;
+  robotis_op::Dance *current_demo = NULL;
   robotis_op::ActionPlay *action_play = new robotis_op::ActionPlay();
 
   ros::NodeHandle nh(ros::this_node::getName());
@@ -67,7 +67,6 @@ int main(int argc, char **argv)
     if (checkManagerRunning(manager_name) == true)
     {
       break;
-      ROS_INFO_COND(DEBUG_PRINT, "Succeed to connect");
     }
     ROS_WARN("Waiting for op3 manager");
   }
@@ -96,7 +95,7 @@ int main(int argc, char **argv)
           break;
         }
 
-        case ActionPlay:
+        case Dance:
         {
           if (current_demo != NULL)
             current_demo->setDemoDisable();
@@ -162,7 +161,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       // sound out desired status
       switch (desired_status)
       {
-        case ActionPlay:
+        case Dance:
           dxlTorqueChecker();
           playSound(default_mp3_path + "Start soccer demonstration.mp3");
           break;
