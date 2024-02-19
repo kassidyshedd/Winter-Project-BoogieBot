@@ -61,7 +61,7 @@ class ActionPlay
             else if (state == PLAYING)
             {
                 ROS_INFO_ONCE("PLAYER - Playing State.");
-                state = RESET;
+                state = DONE;
             }
             else if (state == DONE)
             {
