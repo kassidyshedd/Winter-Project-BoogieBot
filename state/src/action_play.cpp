@@ -62,7 +62,7 @@ class ActionPlay
             else if (state == PLAYING)
             {
                 ROS_INFO_ONCE("PLAYER - Playing State.");
-                state = RESET;
+                state = DONE;
             }
             else if (state == DONE)
             {
@@ -72,6 +72,11 @@ class ActionPlay
                 msg.data = "Done!";
                 done_action_pub.publish(msg);
                 ROS_INFO_ONCE("Published message on 'done' topic, switching to waiting state.");
+                state = RESET;
+            }
+            else if (state == RESET)
+            {
+                first_message = false;
                 state = WAITING;
             }
         }
