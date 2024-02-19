@@ -260,7 +260,7 @@ void ActionPlay::playAction(int motion_index)
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = motion_index;
-
+  ROS_INFO_ONCE("play_demo - playAction ");
   motion_index_pub_.publish(motion_msg);
 }
 
@@ -268,7 +268,7 @@ void ActionPlay::stopAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = StopActionCommand;
-
+  ROS_INFO_ONCE("play_demo - stopAction ");
   motion_index_pub_.publish(motion_msg);
 }
 
@@ -276,7 +276,7 @@ void ActionPlay::brakeAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = BrakeActionCommand;
-
+  ROS_INFO_ONCE("play_demo - brakeAction ");
   motion_index_pub_.publish(motion_msg);
 }
 
