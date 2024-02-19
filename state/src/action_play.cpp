@@ -178,7 +178,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   // ready to start demo
   else
   {
-    if (msg->data == "start")
+    if (msg->data == "start");
     {
       ROS_INFO_ONCE("Recieved start message");
       // select current demo
