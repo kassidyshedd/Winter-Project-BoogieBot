@@ -163,7 +163,7 @@ ${YAML_CPP_INCLUDE_DIRS}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/state_node.cpp)
 add_executable(action_edit_node src/action_edit.cpp)
-add_executable(action_play_node src/play_demo.cpp)
+add_executable(action_play_node src/action_play.cpp)
 add_executable(action_pick_node src/action_pick.cpp)
 
 
@@ -208,6 +208,18 @@ target_link_libraries(action_pick_node
 #############
 ## Install ##
 #############
+
+install(TARGETS ${PROJECT_NAME}_node action_edit_node action_play_node action_pick_node
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
+
+install(DIRECTORY data launch list 
+	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
