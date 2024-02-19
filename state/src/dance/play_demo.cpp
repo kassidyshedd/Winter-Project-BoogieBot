@@ -53,7 +53,7 @@ void ActionPlay::setDemoDisable()
   play_list_.resize(0);
 }
 
-void ActionPlaay::process()
+void ActionPlay::process()
 {
   switch (play_status_)
   {
@@ -264,7 +264,7 @@ void ActionPlay::playAction(int motion_index)
   motion_index_pub_.publish(motion_msg);
 }
 
-void ActionPlaay::stopAction()
+void ActionPlay::stopAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = StopActionCommand;
