@@ -8,7 +8,7 @@
 enum Status
 {
   Ready = 0,
-  Dance = 1,
+  DanceDEMO = 1,
 };
 
 void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
   //create ros wrapper object
   robotis_op::Dance *current_demo = NULL;
-  robotis_op::ActionPlay *action_play = new robotis_op::ActionPlay();
+  robotis_op::DanceDEMO *action_play = new robotis_op::ActionPlay();
 
   ros::NodeHandle nh(ros::this_node::getName());
 
