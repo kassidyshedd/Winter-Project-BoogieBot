@@ -163,8 +163,9 @@ ${YAML_CPP_INCLUDE_DIRS}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/state_node.cpp)
 add_executable(action_edit_node src/action_edit.cpp)
-add_executable(action_play_node src/action_play.cpp)
+add_executable(action_play_node src/play_demo.cpp)
 add_executable(action_pick_node src/action_pick.cpp)
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
