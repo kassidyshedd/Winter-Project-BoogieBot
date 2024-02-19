@@ -5,7 +5,7 @@ namespace robotis_op
 
 ActionPlay::ActionPlay()
     : SPIN_RATE(30),
-      DEBUG_PRINT(false),
+      DEBUG_PRINT(true),
       play_index_(0),
       play_status_(StopAction)
 {

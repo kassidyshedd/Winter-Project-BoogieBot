@@ -8,8 +8,8 @@
 enum Demo_Status
 {
   Ready = 0,
-  ActionPlay = 3,
-  DemoCount = 4,
+  ActionPlay = 1,
+  DemoCount = 2,
 };
 
 void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg);
