@@ -16,7 +16,7 @@
 
 namespace robotis_op
 {
-    class ActionPlay
+    class ActionPlay : public Dance
     {
         public:
             ActionPlay();
