@@ -29,7 +29,7 @@ ros::Publisher play_sound_pub;
 ros::Publisher led_pub;
 ros::Publisher dxl_torque_pub;
 
-std::string default_mp3_path = "";
+// std::string default_mp3_path = "";
 int current_status = Ready;
 int desired_status = Ready;
 bool apply_desired = false;
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
   ros::Subscriber mode_sub = nh.subscribe("STARTING", 1, modeCallback);
 //   ros::Subscriber mode_command_sub = nh.subscribe("/robotis/mode_command", 1, demoModeCommandCallback);
 
-  default_mp3_path = ros::package::getPath("op3_demo") + "/data/mp3/";
+//   default_mp3_path = ros::package::getPath("state") + "/data/mp3/";
   
 
   ros::start();
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
   }
 
   // init procedure
-  playSound(default_mp3_path + "Demonstration ready mode.mp3");
+//   playSound(default_mp3_path + "Demonstration ready mode.mp3");
   // turn on R/G/B LED
   setLED(0x01 | 0x02 | 0x04);
 
@@ -149,7 +149,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       desired_status = Ready;
       apply_desired = true;
 
-      playSound(default_mp3_path + "Demonstration ready mode.mp3");
+    //   playSound(default_mp3_path + "Demonstration ready mode.mp3");
       setLED(0x01 | 0x02 | 0x04);
     }
     else if (msg->data == "user_long")
@@ -173,7 +173,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       {
         case ActionPlay:
           dxlTorqueChecker();
-          playSound(default_mp3_path + "Start motion demonstration.mp3");
+        //   playSound(default_mp3_path + "Start motion demonstration.mp3");
           break;
 
         default:
@@ -192,7 +192,7 @@ void buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
       switch (desired_status)
       {
         case ActionPlay:
-          playSound(default_mp3_path + "Interactive motion mode.mp3");
+        //   playSound(default_mp3_path + "Interactive motion mode.mp3");
           setLED(0x04);
           break;
 
@@ -259,7 +259,7 @@ void modeCallback(const std_msgs::String::ConstPtr &msg)
     desired_status = ActionPlay;
     apply_desired = true;
 
-    playSound(default_mp3_path + "Start motion demonstration.mp3");
+    // playSound(default_mp3_path + "Start motion demonstration.mp3");
      ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
 
 

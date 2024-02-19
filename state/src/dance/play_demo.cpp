@@ -13,7 +13,7 @@ ActionPlay::ActionPlay()
 
   ros::NodeHandle nh(ros::this_node::getName());
 
-  std::string default_path = ros::package::getPath("op3_demo") + "/list/action_script.yaml";
+  std::string default_path = ros::package::getPath("state") + "/list/actions.yaml";
   script_path_ = nh.param<std::string>("action_script", default_path);
 
   std::string default_play_list = "default";
