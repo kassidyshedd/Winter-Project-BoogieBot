@@ -143,7 +143,7 @@ class ActionEditing
                 msg.data = "Edited Pages!";
                 action_edit_pub.publish(msg);
                 ROS_INFO_ONCE("Action Editing - Published message on 'get_ready' topic, switching to done state. ");
-                state = DONE;
+                state = RESET;
             }
 
             else if (state == DONE)

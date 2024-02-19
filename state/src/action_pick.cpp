@@ -152,7 +152,7 @@ class ActionPicking
                 }
 
 
-                state = DONE;
+                state = RESET;
             }
 
             // Done with action, waiting for message on 'reset' topic
