@@ -72,9 +72,10 @@ void ActionPlay::process()
       // action is not running
       if (isActionRunning() == false)
       {
-        ROS_INFO_ONCE("Is running = false");
+        ROS_INFO("Is running = false");
         // play
         bool result_play = playActionWithSound(play_list_.at(play_index_));
+        ROS_INFO_STREAM("result play" << result_play);
 
         ROS_INFO_COND(!result_play, "Fail to play action script.");
 
@@ -82,6 +83,8 @@ void ActionPlay::process()
         ROS_INFO_ONCE("add play index");
         int index_to_play = (play_index_ + 1) % play_list_.size();
         play_index_ = index_to_play;
+        ROS_INFO_ONCE("update play index");
+
       }
       else
       {
@@ -261,10 +264,14 @@ bool ActionPlay::playActionWithSound(int motion_index)
 {
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
   if (map_it == action_sound_table_.end())
+    ROS_INFO_ONCE("returning false");
     return false;
 
+  ROS_INFO_STREAM("motion index" << motion_index );
   playAction(motion_index);
+  ROS_INFO_STREAM("action played" << motion_index);
   playMP3(map_it->second);
+
 
   ROS_INFO_STREAM_COND(DEBUG_PRINT, "action : " << motion_index << ", mp3 path : " << map_it->second);
 
@@ -273,10 +280,12 @@ bool ActionPlay::playActionWithSound(int motion_index)
 
 void ActionPlay::playMP3(std::string &path)
 {
+  ROS_INFO_ONCE("inside play mp3");  
   std_msgs::String sound_msg;
   sound_msg.data = path;
 
   play_sound_pub_.publish(sound_msg);
+  ROS_INFO_ONCE("publish mp3");
 }
 
 void ActionPlay::stopMP3()
