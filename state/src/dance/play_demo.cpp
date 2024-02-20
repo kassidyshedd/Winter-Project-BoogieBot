@@ -314,6 +314,7 @@ void ActionPlay::brakeAction()
 // check running of action
 bool ActionPlay::isActionRunning()
 {
+  ROS_INFO("inside isActionRunning "); 
   op3_action_module_msgs::IsRunning is_running_srv;
 
   if (is_running_client_.call(is_running_srv) == false)
