@@ -142,6 +142,7 @@ void ActionPlay::resumeProcess()
 
 void ActionPlay::pauseProcess()
 {
+  ROS_INFO("pauseprocess()");
   play_status_ = PauseAction;
 }
 
@@ -355,13 +356,15 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
     switch (play_status_)
       {
         case PlayAction:
-        {
+        { 
+          ROS_INFO("button handle callback 1");
           pauseProcess();
           break;
         }
 
         case PauseAction:
         {
+          ROS_INFO("case pause action");
           resumeProcess();
           break;
         }
@@ -413,6 +416,7 @@ void ActionPlay::demoCommandCallback(const std_msgs::String::ConstPtr &msg)
   }
   else if (msg->data == "stop")
   {
+    ROS_INFO("recieve stop message - pause");
     pauseProcess();
   }
 }
