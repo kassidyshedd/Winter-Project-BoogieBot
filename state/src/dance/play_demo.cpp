@@ -351,8 +351,7 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   if (enable_ == false)
     return;
 
-  if (msg->data == "start")_INFO("button handle callback 1");
-        //   paus
+  if (msg->data == "start")
   {
     switch (play_status_)
       {
