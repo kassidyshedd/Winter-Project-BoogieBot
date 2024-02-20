@@ -186,7 +186,7 @@ void ActionPlay::callbackThread()
 
   play_sound_pub_ = nh.advertise<std_msgs::String>("/play_sound_file", 0);
 
-  buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionPlay::buttonHandlerCallback, this);
+//   buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionPlay::buttonHandlerCallback, this);
 
   is_running_client_ = nh.serviceClient<op3_action_module_msgs::IsRunning>("/robotis/action/is_running");
   set_joint_module_client_ = nh.serviceClient<robotis_controller_msgs::SetModule>("/robotis/set_present_ctrl_modules");
@@ -346,50 +346,50 @@ bool ActionPlay::isActionRunning()
   return false;
 }
 
-void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
-{
-  if (enable_ == false)
-    return;
+// void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
+// {
+//   if (enable_ == false)
+//     return;
 
-  if (msg->data == "start")
-  {
-    switch (play_status_)
-      {
-        case ReadyAction:
-        {
-            ROS_INFO("start action");
-            startProcess(play_list_name_);
-            break;
-        }
-        case PlayAction:
-        { 
-          ROS_INFO("button handle callback 1");
-          pauseProcess();
-          break;
-        }
+//   if (msg->data == "start")
+//   {
+//     switch (play_status_)
+//       {
+//         case ReadyAction:
+//         {
+//             ROS_INFO("start action");
+//             startProcess(play_list_name_);
+//             break;
+//         }
+//         case PlayAction:
+//         { 
+//           ROS_INFO("button handle callback 1");
+//           pauseProcess();
+//           break;
+//         }
 
-        case PauseAction:
-        {
-          ROS_INFO("case pause action");
-          resumeProcess();
-          break;
-        }
+//         case PauseAction:
+//         {
+//           ROS_INFO("case pause action");
+//           resumeProcess();
+//           break;
+//         }
 
-        case StopAction:
-        {
-          resumeProcess();
-          break;
-        }
+//         case StopAction:
+//         {
+//           resumeProcess();
+//           break;
+//         }
 
-        default:
-          break;
-      }
-  }
-  else if (msg->data == "mode")
-  {
+//         default:
+//           break;
+//       }
+//   }
+//   else if (msg->data == "mode")
+//   {
 
-  }
-}
+//   }
+// }
 
 void ActionPlay::setModuleToDemo(const std::string &module_name)
 {
