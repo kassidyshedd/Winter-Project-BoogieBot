@@ -351,7 +351,8 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   if (enable_ == false)
     return;
 
-  if (msg->data == "start")
+  if (msg->data == "start")_INFO("button handle callback 1");
+        //   paus
   {
     switch (play_status_)
       {
@@ -359,11 +360,12 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
         {
             ROS_INFO("start action");
             startProcess(play_list_name_);
+            break;
         }
         case PlayAction:
         { 
-        //   ROS_INFO("button handle callback 1");
-        //   pauseProcess();
+          ROS_INFO("button handle callback 1");
+          pauseProcess();
           break;
         }
 
