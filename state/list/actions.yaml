@@ -2,11 +2,16 @@
 action_and_sound: 
   144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
   146: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
   148: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
   147: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
   149: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
   145: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/Thank you.mp3"
 
 # play list
 prev_default: [4, 41, 24, 23, 15, 1, 54, 27, 38]
 default: [144, 146, 148, 147, 149, 145]
+default: [144, 146, 144, 148, 144, 147, 144, 149, 144, 145]
