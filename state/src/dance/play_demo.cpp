@@ -265,8 +265,10 @@ bool ActionPlay::playActionWithSound(int motion_index)
 {
   ROS_INFO("Inside play action with sounds");
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
+  ROS_INFO("Map is created");
+
   if (map_it == action_sound_table_.end())
-    ROS_INFO_ONCE("returning false");
+    ROS_INFO("returning false");
     return false;
 
   ROS_INFO_STREAM("motion index" << motion_index );
