@@ -1,15 +1,15 @@
 # combination action page number and mp3 file path
 action_and_sound: 
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  146: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  148: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  147: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  149: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
-  145: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/SmoothBeats.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  146: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  148: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  147: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  149: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  145: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
 
 # play list
 prev_default: [4, 41, 24, 23, 15, 1, 54, 27, 38]
