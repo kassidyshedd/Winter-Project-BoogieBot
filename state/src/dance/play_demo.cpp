@@ -40,7 +40,7 @@ void ActionPlay::setDemoEnable()
   ROS_INFO_COND(DEBUG_PRINT, "Start ActionScript Demo");
 
   ROS_INFO_ONCE("playing init pose");
-  playAction(InitPose);
+//   playAction(InitPose);
 
   ROS_INFO_ONCE("Move to start process.");
   startProcess(play_list_name_);
