@@ -362,8 +362,8 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
         }
         case PlayAction:
         { 
-          ROS_INFO("button handle callback 1");
-          pauseProcess();
+        //   ROS_INFO("button handle callback 1");
+        //   pauseProcess();
           break;
         }
 
