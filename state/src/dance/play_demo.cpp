@@ -21,7 +21,7 @@ ActionPlay::ActionPlay()
 
   demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
 
-  parseActionScript (script_path_);
+  parseActionScript(script_path_);
 
   boost::thread queue_thread = boost::thread(boost::bind(&ActionPlay::callbackThread, this));
   boost::thread process_thread = boost::thread(boost::bind(&ActionPlay::processThread, this));
@@ -84,6 +84,7 @@ void ActionPlay::process()
         int index_to_play = (play_index_ + 1) % play_list_.size();
         play_index_ = index_to_play;
         ROS_INFO_ONCE("update play index");
+        return;
 
       }
       else
@@ -267,9 +268,15 @@ bool ActionPlay::playActionWithSound(int motion_index)
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
   ROS_INFO("Map is created");
 
+  bool dum = map_it == action_sound_table_.end();
+  ROS_INFO_STREAM("dummy" << dum);
+
+  
   if (map_it == action_sound_table_.end())
+  {
     ROS_INFO("returning false");
     return false;
+  }
 
   ROS_INFO_STREAM("motion index" << motion_index );
   playAction(motion_index);
