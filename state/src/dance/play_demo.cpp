@@ -355,10 +355,15 @@ void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
   {
     switch (play_status_)
       {
+        case ReadyAction:
+        {
+            ROS_INFO("start action");
+            startProcess(play_list_name_);
+        }
         case PlayAction:
         { 
-          ROS_INFO("What will happen????");
-          playAction();
+          ROS_INFO("button handle callback 1");
+          pauseProcess();
           break;
         }
 
