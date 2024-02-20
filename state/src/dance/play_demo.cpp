@@ -319,6 +319,7 @@ bool ActionPlay::isActionRunning()
 
   if (is_running_client_.call(is_running_srv) == false)
   {
+    ROS_INFO("Failing "); 
     ROS_ERROR("Failed to get action status");
     return true;
   }
@@ -326,10 +327,11 @@ bool ActionPlay::isActionRunning()
   {
     if (is_running_srv.response.is_running == true)
     {
+      ROS_INFO("running is true. "); 
       return true;
     }
   }
-
+  ROS_INFO("running is false "); 
   return false;
 }
 
