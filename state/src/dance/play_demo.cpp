@@ -262,6 +262,7 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
 
 bool ActionPlay::playActionWithSound(int motion_index)
 {
+  ROS_INFO("Inside play action with sounds");
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
   if (map_it == action_sound_table_.end())
     ROS_INFO_ONCE("returning false");
