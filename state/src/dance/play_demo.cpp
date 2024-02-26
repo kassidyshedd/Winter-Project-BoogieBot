@@ -20,6 +20,7 @@ ActionPlay::ActionPlay()
   play_list_name_ = nh.param<std::string>("action_script_play_list", default_play_list);
 
   demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
+  motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
 
   parseActionScript(script_path_);
 
@@ -74,7 +75,10 @@ void ActionPlay::process()
       {
         if (play_index_ >= play_list_.size())
         {
-          brakeAction();
+          std_msgs::Int32 motion_msg;
+          motion_msg.data = -2;
+          ROS_INFO_ONCE("about to pub");
+          motion_index_pub_.publish(motion_msg);
           return;
         }
         // ROS_INFO("Is running = false");
@@ -182,7 +186,6 @@ void ActionPlay::callbackThread()
 
   // subscriber & publisher
   module_control_pub_ = nh.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 0);
-  motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
   ROS_INFO_ONCE("pub create");
   std_msgs::Int32 motion_msg;
   motion_msg.data = 0;
