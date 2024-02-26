@@ -195,7 +195,7 @@ class BoogieBot
                 std_msgs::String msg;
                 msg.data = "start";
                 button_pub.publish(msg);
-                ROS_INFO("STATE - mimiced button - published message on /robotis/open_cr/button_topic, waiting for action_player node.");
+                // ROS_INFO("STATE - mimiced button - published message on /robotis/open_cr/button_topic, waiting for action_player node.");
                 
             }
 
