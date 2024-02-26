@@ -52,7 +52,7 @@ void ActionPlay::setDemoDisable()
   stopProcess();
 
   enable_ = false;
-  ROS_WARN("Set Action demo disable");
+  ROS_WARN("Set Action demon disable");
   play_list_.resize(0);
 }
 
