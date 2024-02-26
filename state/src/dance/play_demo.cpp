@@ -83,6 +83,7 @@ void ActionPlay::process()
         // add play index
         // ROS_INFO_ONCE("add play index");
         int index_to_play = (play_index_ + 1) % play_list_.size();
+        ROS_INFO_STREAM("index to play" << index_to_play);
         play_index_ = index_to_play;
         
         // ROS_INFO_ONCE("update play index");
