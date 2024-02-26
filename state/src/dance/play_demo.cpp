@@ -73,27 +73,25 @@ void ActionPlay::process()
       // action is not running
       if (isActionRunning() == false)
       {
-        if (play_index_ >= play_list_.size())
+        int i = 0;
+        while (i < play_list_.size())
         {
-          std_msgs::Int32 motion_msg;
-          motion_msg.data = -2;
-          ROS_INFO_ONCE("about to pub");
-          motion_index_pub_.publish(motion_msg);
+          ROS_INFO_STREAM("i" << i);
+           // ROS_INFO("Is running = false");
+          // play
+          bool result_play = playActionWithSound(play_list_.at(play_index_));
+          ROS_INFO_STREAM("result play" << result_play);
+
+          ROS_INFO_COND(!result_play, "Fail to play action script.");
+
+          // add play index
+          // ROS_INFO_ONCE("add play index");
+          int index_to_play = (play_index_ + 1) % play_list_.size();
+          play_index_ = index_to_play;
+          ++i;
+          // ROS_INFO_ONCE("update play index");
           return;
         }
-        // ROS_INFO("Is running = false");
-        // play
-        bool result_play = playActionWithSound(play_list_.at(play_index_));
-        ROS_INFO_STREAM("result play" << result_play);
-
-        ROS_INFO_COND(!result_play, "Fail to play action script.");
-
-        // add play index
-        // ROS_INFO_ONCE("add play index");
-        int index_to_play = (play_index_ + 1) % play_list_.size();
-        play_index_ = index_to_play;
-        // ROS_INFO_ONCE("update play index");
-        return;
 
       }
       else
