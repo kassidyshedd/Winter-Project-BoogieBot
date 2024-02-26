@@ -87,8 +87,6 @@ void ActionPlay::process()
         
         // ROS_INFO_ONCE("update play index");
         return;
-      }}
-
       }
       else
       {
