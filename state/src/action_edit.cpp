@@ -87,6 +87,11 @@ class ActionEditing
             yamlNode["default"] = defaultList;
 
             std::ofstream fout(filePath);
+
+            if (!fout.is_open())
+            {
+                ROS_ERROR_STREAM("Failed to open file");
+            }
             fout << yamlNode;
             fout.close();
 
@@ -156,4 +161,3 @@ int main(int argc, char* argv[])
     actionEditing.run();
     return 0;
 }
-
