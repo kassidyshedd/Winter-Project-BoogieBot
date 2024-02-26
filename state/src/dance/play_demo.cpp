@@ -72,6 +72,10 @@ void ActionPlay::process()
       // action is not running
       if (isActionRunning() == false)
       {
+        if (play_index_ >= play_list_.size())
+        {
+          return;
+        }
         // ROS_INFO("Is running = false");
         // play
         bool result_play = playActionWithSound(play_list_.at(play_index_));
@@ -354,51 +358,6 @@ bool ActionPlay::isActionRunning()
   // ROS_INFO("running is false "); 
   return false;
 }
-
-// void ActionPlay::buttonHandlerCallback(const std_msgs::String::ConstPtr& msg)
-// {
-//   if (enable_ == false)
-//     return;
-
-//   if (msg->data == "start")
-//   {
-//     switch (play_status_)
-//       {
-//         case ReadyAction:
-//         {
-//             ROS_INFO("start action");
-//             startProcess(play_list_name_);
-//             break;
-//         }
-//         case PlayAction:
-//         { 
-//           ROS_INFO("button handle callback 1");
-//           pauseProcess();
-//           break;
-//         }
-
-//         case PauseAction:
-//         {
-//           ROS_INFO("case pause action");
-//           resumeProcess();
-//           break;
-//         }
-
-//         case StopAction:
-//         {
-//           resumeProcess();
-//           break;
-//         }
-
-//         default:
-//           break;
-//       }
-//   }
-//   else if (msg->data == "mode")
-//   {
-
-//   }
-// }
 
 void ActionPlay::setModuleToDemo(const std::string &module_name)
 {
