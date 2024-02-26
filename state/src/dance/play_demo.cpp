@@ -291,7 +291,7 @@ bool ActionPlay::playActionWithSound(int motion_index)
 
   if (motion_index == 145)
   {
-    ROS_INFO("last action!")
+    ROS_INFO("last action!");
     stopAction();
   }
 
