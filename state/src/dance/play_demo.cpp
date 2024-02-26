@@ -22,6 +22,8 @@ ActionPlay::ActionPlay()
   demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
 
+  int i = 0;
+
   parseActionScript(script_path_);
 
   boost::thread queue_thread = boost::thread(boost::bind(&ActionPlay::callbackThread, this));
@@ -73,7 +75,6 @@ void ActionPlay::process()
       // action is not running
       if (isActionRunning() == false)
       {
-        int i = 0;
         while (i < play_list_.size())
         {
           ROS_INFO_STREAM("i" << i);
