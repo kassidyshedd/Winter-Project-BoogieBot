@@ -283,7 +283,8 @@ bool ActionPlay::playActionWithSound(int motion_index)
 
   if (motion_index == 145)
   {
-    stopAction();
+    ROS_INFO("MOTION INDEX 145 NEEDS TO END!");
+    return false;
   }
 
 
