@@ -58,7 +58,7 @@ class ActionPicking
         double time;
         int tempo;
 
-        map<int, int> danceMap = 
+        std::map<int, int> danceMap = 
         {
             {144, 1},
             {145, 1},
