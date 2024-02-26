@@ -284,7 +284,6 @@ bool ActionPlay::playActionWithSound(int motion_index)
   if (motion_index == 145)
   {
     stopAction();
-    break;
   }
 
 
