@@ -2,15 +2,20 @@
 action_and_sound: 
   144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   146: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  148: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   147: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  148: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   149: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  150: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  151: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  152: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  153: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  154: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  155: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  156: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  157: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  158: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   145: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
 
 # play list
 prev_default: [4, 41, 24, 23, 15, 1, 54, 27, 38]
-default: [144, 146, 144, 148, 144, 147, 144, 149, 144, 145]
+default: [144, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 145]
