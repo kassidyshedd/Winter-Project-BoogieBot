@@ -88,7 +88,7 @@ class ActionEditing
 
             std::ofstream fout(filePath);
             fout << yamlNode;
-            fout.close()
+            fout.close();
 
             ROS_INFO_STREAM("ACTION EDIT - Updated YAML file with routine list" << filePath);
 
