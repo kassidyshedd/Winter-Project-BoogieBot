@@ -85,11 +85,6 @@ void ActionPlay::process()
         int index_to_play = (play_index_ + 1) % play_list_.size();
         ROS_INFO_STREAM("index to play" << index_to_play);
         play_index_ = index_to_play;
-
-        if (play_index_ == play_list_.size() - 1)
-        {
-          stopProcess();
-        }
         
         // ROS_INFO_ONCE("update play index");
         return;
@@ -285,6 +280,11 @@ bool ActionPlay::playActionWithSound(int motion_index)
   playAction(motion_index);
   ROS_INFO_STREAM("action played" << motion_index);
   playMP3(map_it->second);
+
+  if (motion_index == 145)
+  {
+    stopProcess();
+  }
 
 
   ROS_INFO_STREAM_COND(DEBUG_PRINT, "action : " << motion_index << ", mp3 path : " << map_it->second);
