@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <map>
 
 // Create States
 enum State {
@@ -57,6 +58,25 @@ class ActionPicking
         double time;
         int tempo;
 
+        map<int, int> danceMap = 
+        {
+            {144, 1},
+            {145, 1},
+            {146, 2},
+            {147, 2},
+            {148, 3},
+            {149, 3},
+            {150, 1},
+            {151, 1},
+            {152, 1},
+            {153, 1},
+            {154, 5},
+            {155, 5},
+            {156, 4},
+            {157, 4},
+            {158, 4},  
+        };
+
         void num_tempo_callback(const std_msgs::Int64::ConstPtr& msg)
         {
             if (!first_message)
@@ -81,41 +101,39 @@ class ActionPicking
         // Each even action page takes 2 seconds and each odd action page takes 1 second
         // size is the total number of seconds to be accounted for
         // 60 bpm = 1 bps -> 10 seconds = 10 actions ( 8 accounting for initial and final)
-        std::vector<int64_t> genList(int size, int min, int max)
+        std::vector<int64_t> genList(int duration)
         {
-            // Initialize generator
+            // Initialize generator and variables
+            vector<int64_t> routine;
+            int elp_time = 0;
+
             std::random_device rd;
             std::mt19937 gen(rd());
-            std::uniform_int_distribution<int> dist(min, max);
+            std::uniform_int_distribution<int> dist(0, danceMap.size() -1);
 
-            // Gen numbers
-            std::vector<int64_t> random_numbers;
-            // First element is initial position
-            random_numbers.push_back(144);
+            // Add 144 as fist element in routine
+            routine.push_back(144);
+            elp_time += danceMap[144];
 
-            // Remaining size
-            int remainder = size - 2;
-
-            while (remainder > 0)
+            while (elp_time < duration)
             {
-                int number = dist(gen);
-                if (number % 2 == 0)
+                int random = dist(gen);
+                auto it = danceMap.begin();
+                advance(it, random);
+                int danceNum = it->first;
+                int dur = it->second;
+
+                if (danceNum != 144 && danceNum !=145 && elp_time + dur <= duration)
                 {
-                    random_numbers.push_back(number);
-                    remainder -= 2;
-                }
-                else
-                {
-                    random_numbers.push_back(number);
-                    remainder -= 1;
+                    routine.push_back(danceNum);
+                    elp_time += dur;
                 }
             }
 
-            // Last element is final pose
-            random_numbers.push_back(145);
+            routine.push_back(145);
+            elp_time += danceMap[145];
 
-            // return list
-            return random_numbers;
+            return routine;
         }
 
         void timer_callback()
@@ -133,11 +151,12 @@ class ActionPicking
                 ROS_INFO_ONCE("Action Picking - Picking State");
                 
                 // calculate number of actions
-                int size = 60 / 60 * 10;
-                int min = 146;
-                int max = 149;
+                // int size = 60 / 60 * 10;
+                // int min = 146;
+                // int max = 149;
+                int dur = 30;
 
-                std::vector<int64_t> list = genList(size, min, max);
+                std::vector<int64_t> list = genList(dur);
 
                 // Send message
                 state::RandomList msg1;
