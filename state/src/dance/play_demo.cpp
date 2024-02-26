@@ -20,7 +20,6 @@ ActionPlay::ActionPlay()
   play_list_name_ = nh.param<std::string>("action_script_play_list", default_play_list);
 
   demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
-  demo_command_pub = nh.advertise<std_msgs::String>("/robotis/demo_command", 0);
   motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
 
   parseActionScript(script_path_);
@@ -290,13 +289,10 @@ bool ActionPlay::playActionWithSound(int motion_index)
   ROS_INFO_STREAM("action played" << motion_index);
   playMP3(map_it->second);
 
-  if (motion_index == 145
+  if (motion_index == 145)
   {
-    std_msgs::String mg;
-    mg.data = "stop";
-    demo_command_pub.publish(mg);
-    return;
-  })
+    return false;
+  }
 
 
   ROS_INFO_STREAM_COND(DEBUG_PRINT, "action : " << motion_index << ", mp3 path : " << map_it->second);
