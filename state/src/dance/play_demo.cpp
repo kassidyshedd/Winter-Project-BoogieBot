@@ -74,6 +74,7 @@ void ActionPlay::process()
       {
         if (play_index_ >= play_list_.size())
         {
+          brakeAction();
           return;
         }
         // ROS_INFO("Is running = false");
