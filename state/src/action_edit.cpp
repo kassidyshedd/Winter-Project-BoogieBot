@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <fstream>
+#include <yaml-cpp/yaml.h>
 
 // Create States
 enum State {
@@ -56,42 +57,6 @@ class ActionEditing
 
         std::vector<int64_t> action_pages;
 
-        // Load action file
-        std::vector<robotis_op::action_file_define::Page> load_action_file(const std::string& filename)
-        {
-            // Open current .bin file
-            std::ifstream file(filename.c_str(), std::ios::binary);
-            if (!file.is_open())
-            {
-                return {};
-            }
-
-            std::vector<robotis_op::action_file_define::Page> pages;
-            robotis_op::action_file_define::Page page;
-
-            while (file.read(reinterpret_cast<char*>(&page), sizeof(page)))
-            {
-                pages.push_back(page);
-            }
-
-            return pages;
-        }
-
-        // create new list of blank action pages
-        std::vector<robotis_op::action_file_define::Page> create_blank_book(size_t num_pages)
-        {
-            std::vector<robotis_op::action_file_define::Page> blank_pages;
-            robotis_op::action_file_define::Page blank_page;
-
-            for (size_t i = 0; i < num_pages; ++i)
-            {
-                blank_pages.push_back(blank_page);
-            }
-
-            return blank_pages;
-        }
-
-
         void action_list_callback(const state::RandomList::ConstPtr& msg)
         {
             if (!first_message)
@@ -100,18 +65,34 @@ class ActionEditing
                 
                 // Store the list of pages
                 action_pages = msg->nums;
-                ROS_INFO("Stored Pages");
-
-                // Load data file
-                std::vector<robotis_op::action_file_define::Page> book = load_action_file("data/motion_4095.bin");
-
-                // Create blank pages of size action_pages
-                std::vector<robotis_op::action_file_define::Page> blank_pages = create_blank_book(action_pages.size());
 
                 first_message = true;
                 state = EDITING;
                 
             }
+        }
+
+        void updateYAML(const std::string &filePath)
+        {
+            YAML::Node yamlNode;
+
+            for (const auto &num : action_pages)
+            {
+                std::string mp3Path = "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3";
+
+                yamlNode["action_and_sound"][num] = mp3Path;
+            }
+
+            std::vector<int> defaultList(action_pages.begin(), action_pages.end());
+            yamlNode["default"] = defaultList;
+
+            std::ofstream fout(filePath);
+            fout << yamlNode;
+            fout.close()
+
+            ROS_INFO_STREAM("ACTION EDIT - Updated YAML file with routine list" << filePath);
+
+
         }
 
         void resetsub_callback(const std_msgs::String::ConstPtr& msg)
@@ -139,6 +120,9 @@ class ActionEditing
             {
                 ROS_INFO_ONCE("Action Editing - Editing State");
                 
+
+                updateYAML("/home/robotis/TEST/catkin_ws/src/wp-state/state/list");
+
                 std_msgs::String msg;
                 msg.data = "Edited Pages!";
                 action_edit_pub.publish(msg);
