@@ -34,7 +34,7 @@ ActionPlay::~ActionPlay()
 
 void ActionPlay::setDemoEnable()
 {
-  setModuleToDemo("action_mo.dule");
+  setModuleToDemo("action_module");
 
   enable_ = true;
 
