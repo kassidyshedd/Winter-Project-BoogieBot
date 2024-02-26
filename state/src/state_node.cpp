@@ -24,7 +24,6 @@ class BoogieBot
             // Listen publlisher - causes switch in audio_node
             listen_pub = nh.advertise<std_msgs::String>("listening", 10);
             // Tempo publisher - causes switch in action_picking_node
-            // action_pick_pub = nh.advertise<std_msgs::String>("send_tempo", 10);
             action_picking_pub = nh.advertise<std_msgs::Int64>("send_num_tempo", 10);
             // Action list publisher - causes switch in action_editing_node
             action_edit_pub = nh.advertise<state::RandomList>("Send_List", 10);
@@ -168,13 +167,6 @@ class BoogieBot
             else if (state == ACTION_PICKER) 
             {
                 ROS_INFO("STATE - Action_Picker State");
-
-                // std_msgs::String msg;
-                // msg.data = "Ready to pick actions";
-                // action_pick_pub.publish(msg);
-
-                // ROS_INFO_ONCE("STATE - Published message on 'send_tempo' topic, waiting for action_picker node. ");  
-
                 std_msgs::Int64 tempo_msg;
                 msg.data = tempo;
                 action_picking_pub.publish(tempo_msg);
@@ -188,11 +180,6 @@ class BoogieBot
             else if (state == ACTION_EDITOR) 
             {
                 ROS_INFO("STATE - Action_Editing State");     
-
-                // std_msgs::String msg;
-                // msg.data = "Ready to edit actions";
-                // action_edit_pub.publish(msg);
-
                 state::RandomList list_msg;
                 list_msg.nums = list;
                 action_edit_pub.publish(list_msg);
@@ -205,13 +192,6 @@ class BoogieBot
             else if (state == ACTION_PLAYER) 
             {
                 ROS_INFO("STATE - Action_Player State");
-
-                // std_msgs::String msg1;
-                // msg1.data = "Ready to play actions";
-                // action_play_pub.publish(msg1);
-
-                // ROS_INFO_ONCE("State - Published message on 'send_ready' topic, waiting for action_player node. ");  
-
                 std_msgs::String msg;
                 msg.data = "start";
                 button_pub.publish(msg);
