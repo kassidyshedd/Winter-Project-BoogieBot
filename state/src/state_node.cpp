@@ -168,7 +168,7 @@ class BoogieBot
             {
                 ROS_INFO("STATE - Action_Picker State");
                 std_msgs::Int64 tempo_msg;
-                msg.data = tempo;
+                temo_msg.data = tempo;
                 action_picking_pub.publish(tempo_msg);
                 ROS_INFO("STATE - Published message on 'send_num_tempo' topic, waiting for action picker node");
                 
