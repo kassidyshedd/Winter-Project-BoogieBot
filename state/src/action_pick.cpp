@@ -104,7 +104,7 @@ class ActionPicking
         std::vector<int64_t> genList(int duration)
         {
             // Initialize generator and variables
-            vector<int64_t> routine;
+            std::vector<int64_t> routine;
             int elp_time = 0;
 
             std::random_device rd;
