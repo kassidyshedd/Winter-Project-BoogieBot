@@ -264,7 +264,7 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
 
 bool ActionPlay::playActionWithSound(int motion_index)
 {
-  ROS_INFO("Inside play action with sounds");
+  // ROS_INFO("Inside play action with sounds");
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
   ROS_INFO("Map is created");
 
@@ -334,7 +334,7 @@ void ActionPlay::brakeAction()
 // check running of action
 bool ActionPlay::isActionRunning()
 {
-  ROS_INFO("inside isActionRunning "); 
+  // ROS_INFO("inside isActionRunning "); 
   op3_action_module_msgs::IsRunning is_running_srv;
 
   if (is_running_client_.call(is_running_srv) == false)
@@ -347,11 +347,11 @@ bool ActionPlay::isActionRunning()
   {
     if (is_running_srv.response.is_running == true)
     {
-      ROS_INFO("running is true. "); 
+      // ROS_INFO("running is true. "); 
       return true;
     }
   }
-  ROS_INFO("running is false "); 
+  // ROS_INFO("running is false "); 
   return false;
 }
 
