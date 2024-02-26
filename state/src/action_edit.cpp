@@ -86,11 +86,12 @@ class ActionEditing
             std::vector<int> defaultList(action_pages.begin(), action_pages.end());
             yamlNode["default"] = defaultList;
 
-            std::ofstream fout(filePath);
+            std::ofstream fout(filePath, std::ios::trunc);
 
             if (!fout.is_open())
             {
                 ROS_ERROR_STREAM("Failed to open file");
+                return;
             }
             fout << yamlNode;
             fout.close();
@@ -126,7 +127,7 @@ class ActionEditing
                 ROS_INFO_ONCE("Action Editing - Editing State");
                 
 
-                updateYAML("action_list.yaml");
+                updateYAML("/home/robotis/TEST/catkin_ws/src/wp-state/state/list/action_list.yaml");
 
                 std_msgs::String msg;
                 msg.data = "Edited Pages!";
