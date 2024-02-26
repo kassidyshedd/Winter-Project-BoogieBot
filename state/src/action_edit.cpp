@@ -126,7 +126,7 @@ class ActionEditing
                 ROS_INFO_ONCE("Action Editing - Editing State");
                 
 
-                updateYAML("/home/robotis/TEST/catkin_ws/src/wp-state/state/list");
+                updateYAML("action_list.yaml");
 
                 std_msgs::String msg;
                 msg.data = "Edited Pages!";

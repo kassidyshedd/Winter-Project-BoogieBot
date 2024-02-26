@@ -144,7 +144,7 @@ class BoogieBot
             // Waiting for further instruction
             if (state == WAITING) 
             {
-                ROS_INFO("STATE - Waiting State");
+                ROS_INFO_ONCE("STATE - Waiting State");
             }
 
             // listensrv service is called
@@ -152,13 +152,13 @@ class BoogieBot
             // In audio node, audio processing happens - triggered by listen_pub msg
             else if (state == LISTENING)
             {
-                ROS_INFO("STATE - Listen state");
+                ROS_INFO_ONCE("STATE - Listen state");
 
                 std_msgs::String msg;
                 msg.data = "Ready to listen!";
                 listen_pub.publish(msg);
 
-                ROS_INFO("STATE - Published message on 'listening' topic, waiting for audio_node. ");
+                ROS_INFO_ONCE("STATE - Published message on 'listening' topic, waiting for audio_node. ");
             }
 
             // State changes - triggered by tempo_sub
@@ -166,11 +166,11 @@ class BoogieBot
             // In action_picker node, randomly choose different pages
             else if (state == ACTION_PICKER) 
             {
-                ROS_INFO("STATE - Action_Picker State");
+                ROS_INFO_ONCE("STATE - Action_Picker State");
                 std_msgs::Int64 tempo_msg;
                 tempo_msg.data = tempo;
                 action_picking_pub.publish(tempo_msg);
-                ROS_INFO("STATE - Published message on 'send_num_tempo' topic, waiting for action picker node");
+                ROS_INFO_ONCE("STATE - Published message on 'send_num_tempo' topic, waiting for action picker node");
                 
             }
 
@@ -179,11 +179,11 @@ class BoogieBot
             // In action_editing node, edit the actions to match the song.
             else if (state == ACTION_EDITOR) 
             {
-                ROS_INFO("STATE - Action_Editing State");     
+                ROS_INFO_ONCE("STATE - Action_Editing State");     
                 state::RandomList list_msg;
                 list_msg.nums = list;
                 action_edit_pub.publish(list_msg);
-                ROS_INFO("STATE - Published message on 'Send_List' topic, waiting for action_editor node. ");             
+                ROS_INFO_ONCE("STATE - Published message on 'Send_List' topic, waiting for action_editor node. ");             
             }
 
             // State changes - triggered by play_sub
@@ -191,7 +191,7 @@ class BoogieBot
             // In action_player node, play the actions
             else if (state == ACTION_PLAYER) 
             {
-                ROS_INFO("STATE - Action_Player State");
+                ROS_INFO_ONCE("STATE - Action_Player State");
                 std_msgs::String msg;
                 msg.data = "start";
                 button_pub.publish(msg);
@@ -205,7 +205,7 @@ class BoogieBot
             // Return to waiting state 
             else if (state == RESET) 
             {
-                ROS_INFO("State - Reset State");
+                ROS_INFO_ONCE("State - Reset State");
                 std_msgs::String msg;
                 msg.data = "reset!";
                 action_play_pub.publish(msg);
@@ -215,7 +215,7 @@ class BoogieBot
                 first_message_actionedit = false;
                 first_message_actionplay = false;
 
-                ROS_INFO("State - Published message on 'reset' topic, reset all flags, switching to waiting state");  
+                ROS_INFO_ONCE("State - Published message on 'reset' topic, reset all flags, switching to waiting state");  
                 state = WAITING;
             }
         }
