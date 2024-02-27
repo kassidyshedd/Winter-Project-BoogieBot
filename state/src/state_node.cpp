@@ -91,7 +91,7 @@ class BoogieBot
         bool listensrv_callback(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res)
         {
             ROS_INFO("STATE - Recieved 'listen_trigger' request.");
-            state = LISTENING;
+            state = ACTION_PICKER;
             return true;
         }
 
