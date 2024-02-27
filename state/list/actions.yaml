@@ -2,7 +2,7 @@
 action_and_sound: 
   144: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/recording.mp3"
   154: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
-  155: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
+  150: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   156: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   157: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
   146: "/home/robotis/TEST/catkin_ws/src/wp-state/state/data/mp3/dance.mp3"
