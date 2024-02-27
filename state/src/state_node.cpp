@@ -92,7 +92,6 @@ class BoogieBot
         {
             ROS_INFO("STATE - Recieved 'listen_trigger' request.");
             state = ACTION_PICKER;
-            return true;
         }
 
         void num_tempo_callback(const std_msgs::Int64::ConstPtr& msg)
@@ -168,7 +167,7 @@ class BoogieBot
             {
                 ROS_INFO_ONCE("STATE - Action_Picker State");
                 std_msgs::Int64 tempo_msg;
-                tempo_msg.data = tempo;
+                tempo_msg.data = 60;
                 action_picking_pub.publish(tempo_msg);
                 ROS_INFO_ONCE("STATE - Published message on 'send_num_tempo' topic, waiting for action picker node");
                 
