@@ -17,3 +17,10 @@ function to get the song's track_id. Finally, this track_id is put into Spotipy'
 * Navigate to catkin_ws, build, source, etc..
 * Launch audio node
   * `roslaunch audio identify_bpm`
+
+## Publishers
+`/state_num_tempo` std_msgs/msg/Int64 - Tempo of song
+
+## Subscribers
+`/start` std_msgs/msg/String - Begin processing audio
+

@@ -56,5 +56,29 @@ Source, build, and launch state_node
   * Run the bridge
     * `ros2 run ros1_bridge dynamic_bridge --bridge-all-topics`
 
-  
+* Call service to start proces
+  * `rosservice call /listen_trigger`
 
+
+## Publishers
+* `state_node`:
+  * `/listening` std_msgs::msg::String - causes switch in the audio node.
+  * `/send_num_tempo` std_msgs::msg::Int64 - causes switch in action_picking node.
+  * `/Send_list` state::msg::RandomList - causes switch in action_edit node.
+  * `/STARTING` std_msgs::msg::String - causes switch in action_play node.
+  * `/robotis/open_cr/button` std_msgs::msg::String - mimics button press.
+* `action_pick`:
+  * `list_send` messages::msg::RandomList - List of random actions. 
+
+
+## Subscribers
+* `state_node`:
+  * `state_num_tempo` std_msgs::msg::Int64 - Tempo of song, switch to action_pick state.
+  * `list_send` state::msg::RandomList - List of random actions, switch to action_edit state.
+  * `get_ready` std_msgs::msg::String - YAML action file created, switch to action_play state.
+* `action_pick`:
+  * `state_num_tempo` std_msgs::msg::Int64 - Tempo
+
+## Services
+* `state_node`:
+  * `/listen_trigger` std_srv/srv/Empty - Initiates process

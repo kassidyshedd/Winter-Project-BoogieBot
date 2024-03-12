@@ -14,5 +14,10 @@ The actions/state package contains two nodes used in the dynamic dance routine g
 To launch all nodes required for proper initialization of the robot and action nodes:
 `roslaunch state action_nodes.xml`
 
-Use a service call to start the process:
-`rosservice call /listen_trigger`
+## Publishers
+* `action_edit_node`:
+  * `/get_ready` std_msgs/msg/String - causes change in state to switch to action_play_node.
+  
+## Subscribers
+* `action_edit_node`:
+  * `/Send_List` state/msg/RandomList - List of actions
