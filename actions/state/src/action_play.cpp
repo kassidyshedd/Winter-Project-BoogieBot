@@ -1,3 +1,26 @@
+/**
+ * This code was taken from the original ROBOTIS OP3 code, and modified to match my use case. 
+ * The copyright statement is provided below.
+ * /*******************************************************************************
+* Copyright 2017 ROBOTIS CO., LTD.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*******************************************************************************/
+
+/* Author of original unmodified file: Kayman Jung */
+/* Author of current file: Kassidy Shedd*/
+
+
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 
@@ -265,31 +288,3 @@ void modeCallback(const std_msgs::String::ConstPtr &msg)
 
 
 }
-
-// void demoModeCommandCallback(const std_msgs::String::ConstPtr &msg)
-// {
-//   // In demo mode
-//   if (current_status != Ready)
-//   {
-//     if (msg->data == "ready")
-//     {
-//       // go to mode selection status
-//       desired_status = Ready;
-//       apply_desired = true;
-
-//       playSound(default_mp3_path + "Demonstration ready mode.mp3");
-//       setLED(0x01 | 0x02 | 0x04);
-//     }
-//   }
-//   // In ready mode
-//   else
-//   {
-//       desired_status = ActionPlay;
-//       apply_desired = true;
-
-//       // play sound
-//       dxlTorqueChecker();
-//       playSound(default_mp3_path + "Start motion demonstration.mp3");
-//       ROS_INFO_COND(DEBUG_PRINT, "= Start Demo Mode : %d", desired_status);
-//   }
-// }

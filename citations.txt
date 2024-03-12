@@ -6,3 +6,6 @@
 
 [3] https://raw.githubusercontent.com/athackst/deepracer_ws/articles/deepracer_ros2_bridge/dockerfiles/deepracer_ros1_bridge.dockerfile
 [3] ROS1_bridge - Dockerfile
+
+[4] https://answers.ros.org/question/12321/how-to-write-and-parse-yaml-file-for-ros/
+[4] actions/state/src/action_edit.cpp

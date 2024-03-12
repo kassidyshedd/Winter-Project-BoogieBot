@@ -72,6 +72,7 @@ class ActionEditing
             }
         }
 
+        // ########## Begin Citation 4 ##########
         void updateYAML(const std::string &filePath)
         {
             YAML::Node yamlNode;
@@ -97,9 +98,9 @@ class ActionEditing
             fout.close();
 
             ROS_INFO_STREAM("ACTION EDIT - Updated YAML file with routine list" << filePath);
-
-
         }
+
+        // ########## End Citation 4 ##########
 
         void resetsub_callback(const std_msgs::String::ConstPtr& msg)
         {
