@@ -14,3 +14,9 @@ such as shazamio, Spotipy, and a multi-docker framework.
   * Docker
   * shazamio
   * Spotipy
+  
+## Packages
+* `ROS1_bridge`
+  * The ROS1_bridge package creates a docker container which hosts ROS1 Noetic, ROS2 galactic, and the ROS1_bridge. The `state_node` and the `action_pick_node` are built and run from inside this container.  
+* `actions\state`
+* `noetic_audio`
