@@ -32,26 +32,26 @@ Navigate to ws_ros1 & build
 Source, build, and launch state_node
 * `roslaunch state state_node`
 <br>
-In the second instance of the container
-* `export ROS_DISTRO=`
-Source ROS2 install, navigate to ws_ros2, and build
-Source, build, and launch action_pick_node
-* `roslaunch action_pick action_pick_node`
+* In the second instance of the container
+  * `export ROS_DISTRO=`
+* Source ROS2 install, navigate to ws_ros2, and build
+* Source build and launch action_pick_node
+  * `roslaunch action_pick action_pick_node`
 <br>
-In the third instance of the container (Follow Exactly)
-1. `export ROS_DISTRO=`
-2. Source ROS1 install
-3. Source ROS2 install
-4. Source ROS1 build
-* `source ws_ros1/install_isolated/setup.bash`
-5. Source ROS2 build
-* `source ws_ros2/install/local_setup.bash`
-6. Navigate to ros1_bridge directory and build
-* `colcon build --cmake-force-configure`
-Source ROS1_bridge build
-* `source install/local_setup.bash`
-Run the bridge
-* `ros2 run ros1_bridge dynamic_bridge --bridge-all-topics`
+* In the third instance of the container (Follow Exactly)
+  * `export ROS_DISTRO=`
+  * Source ROS1 install
+  * Source ROS2 install
+  * Source ROS1 build
+    * `source ws_ros1/install_isolated/setup.bash`
+  * Source ROS2 build
+    * `source ws_ros2/install/local_setup.bash`
+  * Navigate to ros1_bridge directory and build
+    * `colcon build --cmake-force-configure`
+  * Source ROS1_bridge build
+    * `source install/local_setup.bash`
+  * Run the bridge
+    * `ros2 run ros1_bridge dynamic_bridge --bridge-all-topics`
 
   
 
