@@ -1,5 +1,33 @@
-#include "state/action_play.h"
+/**
+ * This code was taken from the original ROBOTIS OP3 code, and modified to match my use case. 
+ * The copyright statement is provided below.
+ * /*******************************************************************************
+* Copyright 2017 ROBOTIS CO., LTD.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*******************************************************************************/
 
+/* Author of original unmodified file: Kayman Jung */
+/* Author of current file: Kassidy Shedd*/
+
+/// \file play_demo.cpp
+/// \PUBLISHERS:
+///   + motion_index_pub: '/robotis/action/page_num' (std_msgs::Int32), page number in action book
+/// \SUBSCRIBERS:
+/// \SERVICES:
+/// \PARAMETERS:
+
+#include "state/action_play.h"
 namespace robotis_op
 {
 
@@ -13,14 +41,19 @@ ActionPlay::ActionPlay()
 
   ros::NodeHandle nh(ros::this_node::getName());
 
+  // Publishers
+  motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
+
+  // Subscribers
+  demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
+
+  // Parameters
   std::string default_path = ros::package::getPath("state") + "/list/action_list.yaml";
   script_path_ = nh.param<std::string>("action_script", default_path);
-
   std::string default_play_list = "default";
   play_list_name_ = nh.param<std::string>("action_script_play_list", default_play_list);
 
-  demo_command_sub_ = nh.subscribe("/robotis/demo_command", 1, &ActionPlay::demoCommandCallback, this);
-  motion_index_pub_ = nh.advertise<std_msgs::Int32>("/robotis/action/page_num", 0);
+
 
   parseActionScript(script_path_);
 
@@ -28,9 +61,7 @@ ActionPlay::ActionPlay()
   boost::thread process_thread = boost::thread(boost::bind(&ActionPlay::processThread, this));
 }
 
-ActionPlay::~ActionPlay()
-{
-}
+ActionPlay::~ActionPlay() {}
 
 void ActionPlay::setDemoEnable()
 {
@@ -38,19 +69,13 @@ void ActionPlay::setDemoEnable()
 
   enable_ = true;
 
-  ROS_INFO_COND(DEBUG_PRINT, "Start ActionScript Demo");
-
-  ROS_INFO_ONCE("playing init pose");
-//   playAction(InitPose);
-
-  ROS_INFO_ONCE("Move to start process.");
+  // Start playing YAML action file
   startProcess(play_list_name_);
 }
 
 void ActionPlay::setDemoDisable()
 {
   stopProcess();
-
   enable_ = false;
   ROS_WARN("Set Action demon disable");
   play_list_.resize(0);
@@ -58,35 +83,26 @@ void ActionPlay::setDemoDisable()
 
 void ActionPlay::process()
 { 
-  ROS_INFO_ONCE("In process");
   switch (play_status_)
   {
     case PlayAction:
     {
-      ROS_INFO_ONCE("case - play action");  
       if (play_list_.size() == 0)
       {
-        ROS_WARN("Play List is empty.");
         return;
       }
 
       // action is not running
       if (isActionRunning() == false)
       {      
-        // ROS_INFO("Is running = false");
         // play
         bool result_play = playActionWithSound(play_list_.at(play_index_));
-        ROS_INFO_STREAM("result play" << result_play);
-
         ROS_INFO_COND(!result_play, "Fail to play action script.");
 
         // add play index
-        // ROS_INFO_ONCE("add play index");
         int index_to_play = (play_index_ + 1) % play_list_.size();
-        ROS_INFO_STREAM("index to play" << index_to_play);
         play_index_ = index_to_play;
-        
-        // ROS_INFO_ONCE("update play index");
+
         return;
       }
       else
@@ -127,15 +143,8 @@ void ActionPlay::process()
 
 void ActionPlay::startProcess(const std::string &set_name)
 {
-  ROS_INFO_ONCE("start process");
-  ROS_INFO_STREAM("path %s" << script_path_);
-  ROS_INFO_STREAM("path %s" << set_name);
-
   parseActionScriptSetName(script_path_, set_name);
-
-  
   play_status_ = PlayAction;
-  ROS_INFO_STREAM("play status" << play_status_);
 }
 
 void ActionPlay::resumeProcess()
@@ -157,16 +166,11 @@ void ActionPlay::stopProcess()
 
 void ActionPlay::processThread()
 {
-  //set node loop rate
   ros::Rate loop_rate(SPIN_RATE);
-
-  //node loop
   while (ros::ok())
   {
     if (enable_ == true)
       process();
-
-    //relax to fit output rate
     loop_rate.sleep();
   }
 }
@@ -179,16 +183,11 @@ void ActionPlay::callbackThread()
 
   // subscriber & publisher
   module_control_pub_ = nh.advertise<std_msgs::String>("/robotis/enable_ctrl_module", 0);
-  ROS_INFO_ONCE("pub create");
   std_msgs::Int32 motion_msg;
   motion_msg.data = 0;
-  ROS_INFO_ONCE("about to pub");
   motion_index_pub_.publish(motion_msg);
-  ROS_INFO_ONCE("Published initial motion");
 
   play_sound_pub_ = nh.advertise<std_msgs::String>("/play_sound_file", 0);
-
-//   buttuon_sub_ = nh.subscribe("/robotis/open_cr/button", 1, &ActionPlay::buttonHandlerCallback, this);
 
   is_running_client_ = nh.serviceClient<op3_action_module_msgs::IsRunning>("/robotis/action/is_running");
   set_joint_module_client_ = nh.serviceClient<robotis_controller_msgs::SetModule>("/robotis/set_present_ctrl_modules");
@@ -196,7 +195,6 @@ void ActionPlay::callbackThread()
   while (nh.ok())
   {
     ros::spinOnce();
-
     usleep(1000);
   }
 }
@@ -265,20 +263,14 @@ bool ActionPlay::parseActionScriptSetName(const std::string &path, const std::st
 
 bool ActionPlay::playActionWithSound(int motion_index)
 {
-  // ROS_INFO("Inside play action with sounds");
   std::map<int, std::string>::iterator map_it = action_sound_table_.find(motion_index);
-
   bool dum = map_it == action_sound_table_.end();
-  
   if (map_it == action_sound_table_.end())
   {
-    ROS_INFO("returning false");
     return false;
   }
 
-  ROS_INFO_STREAM("motion index" << motion_index );
   playAction(motion_index);
-  ROS_INFO_STREAM("action played" << motion_index);
   playMP3(map_it->second);
 
   if (motion_index == 145)
@@ -286,15 +278,12 @@ bool ActionPlay::playActionWithSound(int motion_index)
     stopProcess();
   }
 
-
   ROS_INFO_STREAM_COND(DEBUG_PRINT, "action : " << motion_index << ", mp3 path : " << map_it->second);
-
   return true;
 }
 
 void ActionPlay::playMP3(std::string &path)
 {
-  ROS_INFO_ONCE("inside play mp3");  
   std_msgs::String sound_msg;
   sound_msg.data = path;
 
@@ -306,7 +295,6 @@ void ActionPlay::stopMP3()
 {
   std_msgs::String sound_msg;
   sound_msg.data = "";
-
   play_sound_pub_.publish(sound_msg);
 }
 
@@ -322,7 +310,6 @@ void ActionPlay::stopAction()
 {
   std_msgs::Int32 motion_msg;
   motion_msg.data = StopActionCommand;
-  ROS_INFO_ONCE("play_demo - stopAction ");
   motion_index_pub_.publish(motion_msg);
 }
 
@@ -337,7 +324,6 @@ void ActionPlay::brakeAction()
 // check running of action
 bool ActionPlay::isActionRunning()
 {
-  // ROS_INFO("inside isActionRunning "); 
   op3_action_module_msgs::IsRunning is_running_srv;
 
   if (is_running_client_.call(is_running_srv) == false)
@@ -350,11 +336,9 @@ bool ActionPlay::isActionRunning()
   {
     if (is_running_srv.response.is_running == true)
     {
-      // ROS_INFO("running is true. "); 
       return true;
     }
   }
-  // ROS_INFO("running is false "); 
   return false;
 }
 
@@ -374,7 +358,6 @@ void ActionPlay::callServiceSettingModule(const std::string &module_name)
       ROS_ERROR("Failed to set module");
       return;
     }
-
     return ;
 }
 
@@ -394,4 +377,4 @@ void ActionPlay::demoCommandCallback(const std_msgs::String::ConstPtr &msg)
   }
 }
 
-} /* namespace robotis_op */
+}

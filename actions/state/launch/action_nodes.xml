@@ -2,14 +2,8 @@
     <!-- Launch op3_manager -->
     <include file="$(find op3_manager)/launch/op3_manager.launch"/>
 
-    <!-- Launch State Node -->
-    <node name="state_node" pkg="state" type="state_node" output="screen" />
-
     <!-- ROS madplay -->
     <node pkg="ros_madplay_player" type="ros_madplay_player" name="ros_madplay_player" output="screen"/>
-
-    <!-- Launch action_picking node -->
-    <node name="action_pick_node" pkg="state" type="action_pick_node" output="screen" />
 
     <!-- Launch action_editing node -->
     <node name="action_edit_node" pkg="state" type="action_edit_node" output="screen" />
