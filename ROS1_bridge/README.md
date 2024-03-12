@@ -22,7 +22,8 @@ Run the docker
 * `docker run -it --network=host --name=<desired_docker_name> -v $(pwd):/catkin_ws/src  <desired_container_name>`
 Open 3 total instances of the docker container
   * `docker exec -it <desired_docker_name /bin/bash` (2x)
-<br>
+
+
 In the first instance of the container
 * `export ROS_DISTRO=`
 Source ROS1 install
@@ -31,13 +32,15 @@ Navigate to ws_ros1 & build
 * `catkin_make_isolated --install`
 Source, build, and launch state_node
 * `roslaunch state state_node`
-<br>
+
+
 * In the second instance of the container
   * `export ROS_DISTRO=`
 * Source ROS2 install, navigate to ws_ros2, and build
 * Source build and launch action_pick_node
   * `roslaunch action_pick action_pick_node`
-<br>
+
+
 * In the third instance of the container (Follow Exactly)
   * `export ROS_DISTRO=`
   * Source ROS1 install
