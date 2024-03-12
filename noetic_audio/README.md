@@ -1,7 +1,9 @@
 # noetic_audio package
-The noetic_audio package contains two node used for tempo indentification. 
+The noetic_audio package contains a node used for tempo indentification. 
 This package is intended to be set up as a docker container, containing all 
 required elements. 
+
+This is a ROS1 Noetic docker container. 
 
 ## ROS Nodes
 * `identify_bpm_node`: Inputs a .wav file into shazamio's `recognoze_song` function, which outputs the song title and artist. This information is used by Spotipy's `search`

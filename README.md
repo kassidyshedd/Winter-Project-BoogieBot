@@ -21,7 +21,7 @@ such as shazamio, Spotipy, and a multi-docker framework.
 * `actions\state`
   * The actions\state package is run directly on the ROBOTIS-OP3 robot. This package includes the `action_edit_node ` and the `action_play_node`.
 * `noetic_audio`
-  * The noetic_audio pakage creates a docker container which hosts ROS1 Noetic. This package includes the the `identify_bpm_node`.
+  * The noetic_audio pakage creates a docker container which hosts ROS1 Noetic. This package includes the `identify_bpm_node`.
 
 ## License and Copyright Information
 The software included with ROBOTIS-OP3 comes is utilized in this project, some components modified and others unmodified. 
