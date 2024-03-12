@@ -19,4 +19,11 @@ such as shazamio, Spotipy, and a multi-docker framework.
 * `ROS1_bridge`
   * The ROS1_bridge package creates a docker container which hosts ROS1 Noetic, ROS2 galactic, and the ROS1_bridge. The `state_node` and the `action_pick_node` are built and run from inside this container.  
 * `actions\state`
+  * The actions\state package is run directly on the ROBOTIS-OP3 robot. This package includes the `action_edit_node ` and the `action_play_node`.
 * `noetic_audio`
+  * The noetic_audio pakage creates a docker container which hosts ROS1 Noetic. This package includes the `audio_node` and the `identify_bpm_node`.
+
+## License and Copyright Information
+The software included with ROBOTIS-OP3 comes is utilized in this project, some components modified and others unmodified. 
+This sotware is licensed with Apache-2.0.
+The orginial ROBOTIS-OP3 software can be found at the following: https://github.com/ROBOTIS-GIT/ROBOTIS-OP3.git.
