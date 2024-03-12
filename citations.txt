@@ -9,3 +9,12 @@
 
 [4] https://answers.ros.org/question/12321/how-to-write-and-parse-yaml-file-for-ros/
 [4] actions/state/src/action_edit.cpp
+
+[5] https://stackoverflow.com/questions/39840319/spotipy-get-track-ids-from-track-names
+[5] noetic_audio/audio/src/identify_bpm.py
+
+[6] https://spotipy.readthedocs.io/en/2.22.1/
+[6] noetic_audio/audio/src/identify_bpm.py
+
+[7] https://pypi.org/project/shazamio/
+[7] noetic_audio/audio/src/identify_bpm.py

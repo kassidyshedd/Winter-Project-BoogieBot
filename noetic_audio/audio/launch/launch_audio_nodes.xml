@@ -1,0 +1,9 @@
+<launch>
+
+    <!-- Launch audio node -->
+    <node name="audio_node" pkg="audio" type="audio_node" output="screen" />
+
+    <!-- Launch identify bpm -->
+    <node name="identify_bpm" pkg="audio" type="identify_bpm.py" output="screen" />
+
+</launch>
