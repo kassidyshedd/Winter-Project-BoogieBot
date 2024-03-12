@@ -26,12 +26,12 @@ Open 3 total instances of the docker container
 
 In the first instance of the container
 * `export ROS_DISTRO=`
-Source ROS1 install
-* `source /opt/ros/noetic/setup.bash`
-Navigate to ws_ros1 & build
-* `catkin_make_isolated --install`
-Source, build, and launch state_node
-* `roslaunch state state_node`
+* Source ROS1 install
+  * `source /opt/ros/noetic/setup.bash`
+* Navigate to ws_ros1 & build
+  * `catkin_make_isolated --install`
+* Source, build, and launch state_node
+  * `roslaunch state state_node`
 
 
 * In the second instance of the container
