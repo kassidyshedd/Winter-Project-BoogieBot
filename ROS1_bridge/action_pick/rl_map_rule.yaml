@@ -1,0 +1,6 @@
+-
+  enable_foreign_mappings: true
+  ros1_package_name: 'state'
+  ros1_message_name: 'RandomList'
+  ros2_package_name: 'messages'  # the package with the message definition
+  ros2_package_name: 'RandomList'

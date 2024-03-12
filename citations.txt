@@ -1,0 +1,8 @@
+[1] https://www.udacity.com/blog/2020/03/c-maps-explained.html
+[1] ROS1_bridge - action_pick/src/action_pick.cpp
+
+[2] https://github.com/ros2/ros1_bridge/blob/master/doc/index.rst
+[2] ROS1_bridge - action_pick/rl_map_rule.yaml, messages/rl_map_rule.yaml, state/rl_map_rule.yaml
+
+[3] https://raw.githubusercontent.com/athackst/deepracer_ws/articles/deepracer_ros2_bridge/dockerfiles/deepracer_ros1_bridge.dockerfile
+[3] ROS1_bridge - Dockerfile

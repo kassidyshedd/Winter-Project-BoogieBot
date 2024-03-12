@@ -1,0 +1,3 @@
+-
+  ros1_package_name: 'state'
+  ros2_package_name: 'messages'
